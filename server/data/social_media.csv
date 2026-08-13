@@ -1,0 +1,22 @@
+platform,likes,comments,shares,post_type,post_time
+Instagram,1200,300,50,Reels,2023-10-01 18:30:00
+Instagram,800,150,20,Static,2023-10-02 12:00:00
+Instagram,1500,400,100,Carousel,2023-10-03 19:00:00
+Instagram,900,200,30,Reels,2023-10-04 17:30:00
+Facebook,400,50,10,Static,2023-10-01 09:00:00
+Facebook,600,80,25,Video,2023-10-02 18:45:00
+Facebook,300,40,5,Static,2023-10-03 10:15:00
+Facebook,750,120,40,Video,2023-10-04 19:30:00
+Twitter,150,20,100,Text,2023-10-01 08:00:00
+Twitter,300,45,200,Image,2023-10-02 13:00:00
+Twitter,200,30,150,Text,2023-10-03 17:00:00
+Twitter,450,80,300,Video,2023-10-04 19:15:00
+LinkedIn,250,50,30,Article,2023-10-01 07:30:00
+LinkedIn,400,80,60,Image,2023-10-02 11:45:00
+LinkedIn,350,70,50,Text,2023-10-03 16:30:00
+LinkedIn,600,120,90,Video,2023-10-04 09:00:00
+Instagram,1100,280,45,Reels,2023-10-05 18:00:00
+Instagram,950,220,35,Carousel,2023-10-06 19:15:00
+Facebook,500,70,15,Video,2023-10-05 10:00:00
+Twitter,280,40,180,Text,2023-10-06 14:00:00
+LinkedIn,450,90,70,Image,2023-10-05 08:30:00

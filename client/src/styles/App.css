@@ -1,0 +1,34 @@
+.app {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1;
+}
+
+.screen-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: var(--shell-padding);
+}
+
+.screen-fallback__panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 100%;
+}
+
+.screen-fallback__panel h1 {
+  margin-bottom: 0.75rem;
+}
+
+.screen-fallback__panel p {
+  margin-bottom: 1.5rem;
+}

@@ -1,0 +1,5 @@
+- [x] Add localStorage persistence for posts in EngagementAnalysis.jsx
+- [x] Add loading state in EngagementAnalysis.jsx
+- [x] Add error handling in EngagementPrediction.jsx for analyze button
+- [x] Test persistence on reload
+- [x] Test analyze button functionality
