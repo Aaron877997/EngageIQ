@@ -1,0 +1,351 @@
+{
+  "dataset_metadata": {
+    "version": "2.4.0",
+    "source": "Aggregated Social Media Platform Webhooks (Meta Graph API, X API v2, LinkedIn Marketing)",
+    "last_updated": "2026-08-14T05:19:48.202Z",
+    "total_records": 14
+  },
+  "posts": [
+    {
+      "platform": "facebook",
+      "post_type": "video",
+      "caption_text": "Live case study: How AI multi-agent teams scaled our release velocity 4x! Swipe for benchmarks. What do you think? #AI #DevTools",
+      "media_specs": {
+        "aspect_ratio": "9:16",
+        "duration_sec": 24,
+        "has_subtitles": true,
+        "hook_rating": 9,
+        "audio_type": "trending"
+      },
+      "timestamp": "2026-08-14T05:19:48.175Z",
+      "day_of_week": "Thursday",
+      "hour_of_day": 19,
+      "metrics": {
+        "likes": 2196,
+        "comments": 364,
+        "shares": 260,
+        "reach": 52000,
+        "video_views": 48000
+      },
+      "engagement_score": 93,
+      "id": "sync_post_1786684788202_0"
+    },
+    {
+      "platform": "instagram",
+      "post_type": "video",
+      "caption_text": "Live case study: How AI multi-agent teams scaled our release velocity 4x! Swipe for benchmarks. What do you think? #AI #DevTools",
+      "media_specs": {
+        "aspect_ratio": "9:16",
+        "duration_sec": 24,
+        "has_subtitles": true,
+        "hook_rating": 9,
+        "audio_type": "trending"
+      },
+      "timestamp": "2026-08-14T05:17:12.442Z",
+      "day_of_week": "Thursday",
+      "hour_of_day": 19,
+      "metrics": {
+        "likes": 2452,
+        "comments": 455,
+        "shares": 271,
+        "reach": 52000,
+        "video_views": 48000
+      },
+      "engagement_score": 93,
+      "id": "sync_post_1786684632728_0"
+    },
+    {
+      "id": "ig_post_101",
+      "platform": "instagram",
+      "post_type": "video",
+      "caption_text": "Discover 5 AI tools that will save you 10+ hours every week! Which one are you trying first? Link in bio. #AI #TechTrends #Productivity",
+      "media_specs": {
+        "aspect_ratio": "9:16",
+        "duration_sec": 28,
+        "has_subtitles": true,
+        "hook_rating": 9,
+        "audio_type": "trending"
+      },
+      "timestamp": "2024-03-01T18:30:00Z",
+      "day_of_week": "Wednesday",
+      "hour_of_day": 18,
+      "metrics": {
+        "likes": 2450,
+        "comments": 580,
+        "shares": 410,
+        "reach": 68000,
+        "video_views": 61000,
+        "watch_time_sec": 24
+      },
+      "engagement_score": 94
+    },
+    {
+      "id": "ig_post_102",
+      "platform": "instagram",
+      "post_type": "image",
+      "caption_text": "Step-by-step framework to build dark mode design systems like a pro. Swipe through for best practices! #UIUX #DesignSystem #WebDesign",
+      "media_specs": {
+        "aspect_ratio": "4:5",
+        "image_type": "carousel",
+        "slide_count": 6,
+        "has_text_overlay": true
+      },
+      "timestamp": "2024-03-02T19:00:00Z",
+      "day_of_week": "Thursday",
+      "hour_of_day": 19,
+      "metrics": {
+        "likes": 2100,
+        "comments": 490,
+        "shares": 380,
+        "reach": 59000,
+        "video_views": 0,
+        "watch_time_sec": 0
+      },
+      "engagement_score": 88
+    },
+    {
+      "id": "ig_post_103",
+      "platform": "instagram",
+      "post_type": "text",
+      "caption_text": "Consistency is the secret code of high achievers. Keep pushing forward every single day. #Motivation #StartupLife",
+      "media_specs": {
+        "aspect_ratio": "1:1",
+        "image_type": "single",
+        "slide_count": 1,
+        "has_text_overlay": false
+      },
+      "timestamp": "2024-03-03T12:00:00Z",
+      "day_of_week": "Monday",
+      "hour_of_day": 12,
+      "metrics": {
+        "likes": 780,
+        "comments": 140,
+        "shares": 25,
+        "reach": 18000,
+        "video_views": 0,
+        "watch_time_sec": 0
+      },
+      "engagement_score": 52
+    },
+    {
+      "id": "ig_post_104",
+      "platform": "instagram",
+      "post_type": "video",
+      "caption_text": "How senior developers debug production issues in 3 simple steps. Save this for your next sprint! #Coding #WebDev #JavaScript",
+      "media_specs": {
+        "aspect_ratio": "9:16",
+        "duration_sec": 22,
+        "has_subtitles": true,
+        "hook_rating": 8,
+        "audio_type": "voiceover"
+      },
+      "timestamp": "2024-03-04T17:30:00Z",
+      "day_of_week": "Friday",
+      "hour_of_day": 17,
+      "metrics": {
+        "likes": 1850,
+        "comments": 390,
+        "shares": 290,
+        "reach": 49000,
+        "video_views": 44000,
+        "watch_time_sec": 19
+      },
+      "engagement_score": 86
+    },
+    {
+      "id": "tw_post_201",
+      "platform": "twitter",
+      "post_type": "video",
+      "caption_text": "Here is a live demo of our new query engine answering complex queries in milliseconds. Thoughts? 🧵 #AI #BuildInPublic",
+      "media_specs": {
+        "aspect_ratio": "9:16",
+        "duration_sec": 20,
+        "has_subtitles": true,
+        "hook_rating": 9,
+        "audio_type": "voiceover"
+      },
+      "timestamp": "2024-03-01T19:15:00Z",
+      "day_of_week": "Wednesday",
+      "hour_of_day": 19,
+      "metrics": {
+        "likes": 640,
+        "comments": 130,
+        "shares": 460,
+        "reach": 44000,
+        "video_views": 38000,
+        "watch_time_sec": 18
+      },
+      "engagement_score": 92
+    },
+    {
+      "id": "tw_post_202",
+      "platform": "twitter",
+      "post_type": "text",
+      "caption_text": "5 non-negotiable daily habits that scaled our user base from 10k to 100k active users: A quick breakdown 👇 #SaaS #Growth",
+      "media_specs": {
+        "aspect_ratio": "none",
+        "duration_sec": 0,
+        "has_subtitles": false,
+        "hook_rating": 8
+      },
+      "timestamp": "2024-03-02T08:30:00Z",
+      "day_of_week": "Tuesday",
+      "hour_of_day": 8,
+      "metrics": {
+        "likes": 520,
+        "comments": 95,
+        "shares": 380,
+        "reach": 35000,
+        "video_views": 0,
+        "watch_time_sec": 0
+      },
+      "engagement_score": 84
+    },
+    {
+      "id": "tw_post_203",
+      "platform": "twitter",
+      "post_type": "text",
+      "caption_text": "Unpopular opinion: writing clean, readable code beats clever one-liners every single time. What do you think? #DevCommunity",
+      "media_specs": {
+        "aspect_ratio": "none",
+        "duration_sec": 0,
+        "has_subtitles": false,
+        "hook_rating": 7
+      },
+      "timestamp": "2024-03-03T17:00:00Z",
+      "day_of_week": "Thursday",
+      "hour_of_day": 17,
+      "metrics": {
+        "likes": 390,
+        "comments": 85,
+        "shares": 240,
+        "reach": 26000,
+        "video_views": 0,
+        "watch_time_sec": 0
+      },
+      "engagement_score": 76
+    },
+    {
+      "id": "li_post_301",
+      "platform": "linkedin",
+      "post_type": "video",
+      "caption_text": "Excited to announce EngageIQ 2.0! Watch our founder walk through real-time engagement intelligence. Which feature stands out most to your team? #ProductLaunch #Innovation #AI",
+      "media_specs": {
+        "aspect_ratio": "9:16",
+        "duration_sec": 45,
+        "has_subtitles": true,
+        "hook_rating": 9,
+        "audio_type": "voiceover"
+      },
+      "timestamp": "2024-03-01T08:30:00Z",
+      "day_of_week": "Tuesday",
+      "hour_of_day": 8,
+      "metrics": {
+        "likes": 1150,
+        "comments": 290,
+        "shares": 195,
+        "reach": 64000,
+        "video_views": 52000,
+        "watch_time_sec": 38
+      },
+      "engagement_score": 96
+    },
+    {
+      "id": "li_post_302",
+      "platform": "linkedin",
+      "post_type": "image",
+      "caption_text": "Framework for modern social intelligence: moving from vanity metrics to business revenue impact. Swipe through the 5 slides below! #Strategy #Analytics #B2BMarketing",
+      "media_specs": {
+        "aspect_ratio": "4:5",
+        "image_type": "carousel",
+        "slide_count": 5,
+        "has_text_overlay": true
+      },
+      "timestamp": "2024-03-02T10:00:00Z",
+      "day_of_week": "Wednesday",
+      "hour_of_day": 10,
+      "metrics": {
+        "likes": 820,
+        "comments": 175,
+        "shares": 130,
+        "reach": 42000,
+        "video_views": 0,
+        "watch_time_sec": 0
+      },
+      "engagement_score": 85
+    },
+    {
+      "id": "li_post_303",
+      "platform": "linkedin",
+      "post_type": "text",
+      "caption_text": "We are expanding our engineering and ML teams globally! If you love building high-throughput distributed systems, check out our careers page or DM me directly. #Hiring #Engineering #TechJobs",
+      "media_specs": {
+        "aspect_ratio": "none",
+        "duration_sec": 0,
+        "has_subtitles": false,
+        "hook_rating": 6
+      },
+      "timestamp": "2024-03-03T16:30:00Z",
+      "day_of_week": "Thursday",
+      "hour_of_day": 16,
+      "metrics": {
+        "likes": 560,
+        "comments": 110,
+        "shares": 75,
+        "reach": 29000,
+        "video_views": 0,
+        "watch_time_sec": 0
+      },
+      "engagement_score": 72
+    },
+    {
+      "id": "fb_post_401",
+      "platform": "facebook",
+      "post_type": "video",
+      "caption_text": "Full recap of our latest community tech summit and customer spotlight. Check out the highlights and let us know what you want to see next! #Community #TechTalk #Innovation",
+      "media_specs": {
+        "aspect_ratio": "16:9",
+        "duration_sec": 48,
+        "has_subtitles": true,
+        "hook_rating": 8,
+        "audio_type": "trending"
+      },
+      "timestamp": "2024-03-01T18:45:00Z",
+      "day_of_week": "Friday",
+      "hour_of_day": 18,
+      "metrics": {
+        "likes": 890,
+        "comments": 155,
+        "shares": 85,
+        "reach": 38000,
+        "video_views": 29000,
+        "watch_time_sec": 32
+      },
+      "engagement_score": 82
+    },
+    {
+      "id": "fb_post_402",
+      "platform": "facebook",
+      "post_type": "text",
+      "caption_text": "Behind the scenes at our Q3 hackathon! Congratulations to the winning team for their incredible prototype.",
+      "media_specs": {
+        "aspect_ratio": "none",
+        "duration_sec": 0,
+        "has_subtitles": false,
+        "hook_rating": 5
+      },
+      "timestamp": "2024-03-02T10:15:00Z",
+      "day_of_week": "Sunday",
+      "hour_of_day": 10,
+      "metrics": {
+        "likes": 420,
+        "comments": 50,
+        "shares": 18,
+        "reach": 15000,
+        "video_views": 0,
+        "watch_time_sec": 0
+      },
+      "engagement_score": 48
+    }
+  ]
+}

@@ -1,22 +1,27 @@
-platform,likes,comments,shares,post_type,post_time
-Instagram,1200,300,50,Reels,2023-10-01 18:30:00
-Instagram,800,150,20,Static,2023-10-02 12:00:00
-Instagram,1500,400,100,Carousel,2023-10-03 19:00:00
-Instagram,900,200,30,Reels,2023-10-04 17:30:00
-Facebook,400,50,10,Static,2023-10-01 09:00:00
-Facebook,600,80,25,Video,2023-10-02 18:45:00
-Facebook,300,40,5,Static,2023-10-03 10:15:00
-Facebook,750,120,40,Video,2023-10-04 19:30:00
-Twitter,150,20,100,Text,2023-10-01 08:00:00
-Twitter,300,45,200,Image,2023-10-02 13:00:00
-Twitter,200,30,150,Text,2023-10-03 17:00:00
-Twitter,450,80,300,Video,2023-10-04 19:15:00
-LinkedIn,250,50,30,Article,2023-10-01 07:30:00
-LinkedIn,400,80,60,Image,2023-10-02 11:45:00
-LinkedIn,350,70,50,Text,2023-10-03 16:30:00
-LinkedIn,600,120,90,Video,2023-10-04 09:00:00
-Instagram,1100,280,45,Reels,2023-10-05 18:00:00
-Instagram,950,220,35,Carousel,2023-10-06 19:15:00
-Facebook,500,70,15,Video,2023-10-05 10:00:00
-Twitter,280,40,180,Text,2023-10-06 14:00:00
-LinkedIn,450,90,70,Image,2023-10-05 08:30:00
+platform,likes,comments,shares,post_type,post_time,reach,impressions,video_views,watch_time_sec,has_cta,hashtags,topic_category,caption_text
+Instagram,1850,420,135,Reels,2023-10-01 18:30:00,52000,74000,48000,28,1,"#TechTrends #AI #Innovation",Technology,"Discover 5 AI tools that will save you 10+ hours every week! Which one are you trying first? Link in bio."
+Instagram,820,160,25,Static,2023-10-02 12:00:00,18500,24000,0,0,0,"#Motivation #StartupLife",Business,"Consistency is the secret code of high achievers. Keep pushing forward every single day."
+Instagram,2100,510,190,Carousel,2023-10-03 19:00:00,64000,88000,0,0,1,"#ProductDesign #UIUX #DesignSystem",Design,"Step-by-step framework to build dark mode design systems like a pro. Swipe through for best practices!"
+Instagram,1400,310,75,Reels,2023-10-04 17:30:00,41000,59000,38000,22,1,"#Coding #WebDev #JavaScript",Developer,"How senior developers debug production issues in 3 simple steps. Save this for your next sprint!"
+Instagram,1650,380,110,Reels,2023-10-05 18:00:00,47000,66000,43000,25,1,"#GrowthHacking #Marketing",Marketing,"The 1 marketing hook that tripled our organic reach in 14 days. Learn the psychology behind it."
+Instagram,1250,290,60,Carousel,2023-10-06 19:15:00,36000,49000,0,0,1,"#DataScience #Python",Technology,"Top 7 Python libraries for data visualization in 2024. Tap through and bookmark!"
+Instagram,980,210,40,Static,2023-10-07 14:00:00,22000,31000,0,0,0,"#RemoteWork #Productivity",Career,"3 workspace essentials that keep our distributed team focused and energized all day."
+Instagram,2400,630,280,Reels,2023-10-08 20:00:00,78000,105000,72000,32,1,"#AITools #Automation #FutureOfWork",Technology,"Watch AI build a complete full-stack web app in under 60 seconds. What do you think about this?"
+Facebook,620,85,35,Video,2023-10-01 18:45:00,28000,39000,21000,45,1,"#Community #TechTalk",Technology,"Full recap of our latest community tech summit and customer spotlight. Check out the highlights!"
+Facebook,450,55,18,Static,2023-10-02 09:00:00,16000,22000,0,0,0,"#Leadership #Culture",Business,"Great teams are built on mutual trust and psychological safety. Here is how we foster transparency."
+Facebook,820,140,65,Video,2023-10-03 19:30:00,39000,51000,32000,58,1,"#CaseStudy #ClientSuccess",Business,"How our enterprise partner reduced analytics latency by 70%. Read the full case study below!"
+Facebook,380,45,12,Static,2023-10-04 10:15:00,14000,19000,0,0,0,"#CompanyCulture #BehindTheScenes",Culture,"Behind the scenes at our Q3 hackathon! Congratulations to the winning team."
+Facebook,710,110,48,Video,2023-10-05 18:30:00,32000,44000,26000,40,1,"#Webinar #AI",Technology,"Missed our live workshop on LLM evaluation? Watch the 10-minute masterclass replay here."
+Facebook,590,95,30,Video,2023-10-06 11:00:00,24000,33000,19000,36,0,"#ProductUpdate #NewFeature",Technology,"Introducing smart sentiment filters and real-time competitor tracking in your workspace."
+Twitter,480,95,340,Video,2023-10-01 19:15:00,34000,52000,29000,18,1,"#AI #BuildInPublic",Technology,"Here is a live demo of our new query engine answering complex queries in milliseconds. Thoughts? 🧵"
+Twitter,320,50,210,Image,2023-10-02 13:00:00,21000,32000,0,0,1,"#SaaS #Infographic",Business,"The anatomy of a viral B2B post in one visual breakdown. Retweet if you find this useful!"
+Twitter,220,35,160,Text,2023-10-03 17:00:00,15000,23000,0,0,0,"#DevCommunity",Developer,"Unpopular opinion: writing clean, readable code beats clever one-liners every single time."
+Twitter,540,120,410,Video,2023-10-04 18:30:00,42000,63000,36000,20,1,"#TechNews #OpenSource",Developer,"We open-sourced our entire analytics parser today. Star the repo on GitHub! 🚀"
+Twitter,390,70,290,Text,2023-10-05 08:30:00,26000,38000,0,0,1,"#Productivity #Founder",Business,"5 non-negotiable daily habits that scaled our user base from 10k to 100k active users:"
+Twitter,610,140,490,Video,2023-10-06 20:00:00,49000,75000,42000,24,1,"#AIInnovation #GenerativeAI",Technology,"AI models just solved multi-agent pair programming. Here is a breakdown of what this means for devs:"
+LinkedIn,780,165,110,Video,2023-10-01 09:00:00,41000,58000,34000,52,1,"#Leadership #FutureOfWork",Business,"Why leading with empathy and clear KPIs drives 3x higher team retention. Video key takeaways:"
+LinkedIn,540,110,85,Image,2023-10-02 11:45:00,28000,39000,0,0,1,"#Strategy #Analytics",Business,"Framework for modern social intelligence: moving from vanity metrics to business revenue impact."
+LinkedIn,410,80,60,Text,2023-10-03 16:30:00,21000,29000,0,0,1,"#Hiring #Engineering",Career,"We are expanding our engineering and ML teams globally! What is your favorite tech stack today?"
+LinkedIn,890,210,145,Video,2023-10-04 08:30:00,51000,72000,44000,65,1,"#ProductLaunch #Innovation",Technology,"Excited to announce EngageIQ 2.0! Watch our founder walk through real-time engagement intelligence."
+LinkedIn,620,135,95,Image,2023-10-05 10:00:00,33000,46000,0,0,1,"#DataAnalysis #B2BMarketing",Marketing,"How top B2B brands structure their weekly content schedule for maximum executive reach."
+LinkedIn,350,75,45,Article,2023-10-06 07:30:00,18000,25000,0,0,1,"#ThoughtLeadership #AI",Technology,"Deep-dive article: The evolution of transformer models in social media engagement prediction."

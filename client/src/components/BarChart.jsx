@@ -48,7 +48,13 @@ function BarChart({ connectedPlatforms }) {
         ))}
       </svg> */}
 
-      <svg width="400" height="200">
+      <svg
+        width="400"
+        height="200"
+        viewBox="0 0 400 200"
+        className="bar-chart-svg"
+        style={{ width: '100%', height: 'auto', maxHeight: '220px', display: 'block', margin: '0 auto' }}
+      >
         {entries.map(([platform, value], i) => (
           <g key={platform}>
             <rect

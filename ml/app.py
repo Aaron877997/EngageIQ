@@ -1,16 +1,20 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
+from typing import Optional
 from model import predict
 
-app = FastAPI()
+app = FastAPI(title="EngageIQ ML Prediction Service")
 
 class PredictRequest(BaseModel):
-    followers: int
-    postText: str
-    postType: str
-    reactions: int
-    comments: int
-    daysSincePosted: int
+    followers: Optional[int] = 10000
+    postText: Optional[str] = ""
+    postType: Optional[str] = "text"
+    reactions: Optional[int] = 50
+    comments: Optional[int] = 10
+    daysSincePosted: Optional[int] = 1
+    durationSec: Optional[int] = 25
+    hasSubtitles: Optional[bool] = True
+    hookRating: Optional[int] = 8
 
 @app.post("/api/predict-engagement")
 def predict_endpoint(request: PredictRequest):
@@ -18,4 +22,4 @@ def predict_endpoint(request: PredictRequest):
     result = predict(data)
     return result
 
-#uvicorn app:app --reload 
+# Run with: uvicorn app:app --reload --port 8000

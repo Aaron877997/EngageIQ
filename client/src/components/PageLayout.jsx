@@ -2,11 +2,12 @@ import AppShell from "./AppShell";
 import "./PageLayout.css";
 
 export function createDashboardNav(onNavigate, current) {
+  const norm = (current || "").toString().replace(/^\//, "");
   return [
-    { label: "Dashboard", onClick: () => onNavigate("dashboard"), active: current === "dashboard" },
-    { label: "AI Query", onClick: () => onNavigate("ai-query"), active: current === "ai-query" },
-    { label: "Recommendations", onClick: () => onNavigate("recommendations"), active: current === "recommendations" },
-    { label: "Export", onClick: () => onNavigate("export"), active: current === "export" },
+    { label: "Dashboard", onClick: () => onNavigate("dashboard"), active: norm === "dashboard" },
+    { label: "AI Query", onClick: () => onNavigate("ai-query"), active: norm === "ai-query" },
+    { label: "Recommendations", onClick: () => onNavigate("recommendations"), active: norm === "recommendations" },
+    { label: "Export", onClick: () => onNavigate("export"), active: norm === "export" },
   ];
 }
 
@@ -37,6 +38,22 @@ function PageLayout({
             <h1>{title}</h1>
             {subtitle && <p className="page-top__subtitle">{subtitle}</p>}
           </div>
+
+          {isDashboard && nav.length > 0 && (
+            <nav className="page-nav page-nav--tabs" aria-label="Dashboard sections">
+              {nav.map((item) => (
+                <button
+                  key={item.label}
+                  type="button"
+                  onClick={item.onClick}
+                  className={`page-tab ${item.active ? "page-tab--active" : ""}`}
+                >
+                  {item.label}
+                </button>
+              ))}
+            </nav>
+          )}
+
           {!isDashboard && nav.length > 0 && (
             <nav className="page-nav page-nav--inline" aria-label="Page navigation">
               {nav.map((item) => (
@@ -52,21 +69,6 @@ function PageLayout({
             </nav>
           )}
         </div>
-
-        {isDashboard && nav.length > 0 && (
-          <nav className="page-nav page-nav--tabs" aria-label="Dashboard sections">
-            {nav.map((item) => (
-              <button
-                key={item.label}
-                type="button"
-                onClick={item.onClick}
-                className={`page-tab ${item.active ? "page-tab--active" : ""}`}
-              >
-                {item.label}
-              </button>
-            ))}
-          </nav>
-        )}
       </div>
 
       <main className="page-body">{children}</main>

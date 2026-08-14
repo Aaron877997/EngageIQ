@@ -36,9 +36,9 @@
   --shadow-md: 0 12px 32px rgba(0, 0, 0, 0.35);
   --shadow-glow: 0 0 28px var(--accent-glow);
 
-  --border-radius: 14px;
-  --border-radius-lg: 18px;
-  --border-radius-xl: 24px;
+  --border-radius: 8px;
+  --border-radius-lg: 12px;
+  --border-radius-xl: 16px;
 
   --transition-fast: 0.2s ease;
   --transition-normal: 0.3s ease;
@@ -52,7 +52,11 @@
 
 html, body {
   width: 100%;
-  min-height: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  scrollbar-gutter: stable;
 }
 
 body {
@@ -61,7 +65,6 @@ body {
   color: var(--text-primary);
   font-size: 16px;
   line-height: 1.6;
-  overflow-x: hidden;
 }
 
 body::before,
@@ -102,10 +105,15 @@ body::after {
   }
 }
 
+#root,
 .app {
+  width: 100%;
+  height: 100%;
   min-height: 100vh;
+  max-height: 100vh;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 /* Typography */
@@ -201,13 +209,13 @@ p {
 /* Button Base Styles */
 button {
   font-family: 'Inter', sans-serif;
-  font-size: 1rem;
+  font-size: 0.92rem;
   font-weight: 600;
   border: none;
   border-radius: var(--border-radius);
   cursor: pointer;
-  transition: all var(--transition-normal);
-  padding: 12px 24px;
+  transition: all var(--transition-fast);
+  padding: 8px 16px;
 }
 
 /* Primary Button */
@@ -215,19 +223,20 @@ button {
 button[type="submit"], 
 .proceed-btn,
 header nav button {
-  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+  background: #2563eb;
   color: white;
-  box-shadow: var(--shadow-sm);
-  border: 1px solid transparent;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  border: 1px solid #3b82f6;
 }
 
 .btn-primary:hover, 
 button[type="submit"]:hover, 
 .proceed-btn:hover,
 header nav button:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-glow);
-  border-color: rgba(255, 255, 255, 0.3);
+  background: #1d4ed8;
+  border-color: #60a5fa;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.35);
+  transform: translateY(-1px);
 }
 
 .btn-primary:active, 
@@ -242,9 +251,8 @@ header nav button:active {
 .back-btn, 
 button[onClick*="onBack"] {
   background: rgba(255, 255, 255, 0.05);
-  color: var(--text-secondary);
-  border: 1px solid var(--border-color);
-  backdrop-filter: blur(4px);
+  color: #e2e8f0;
+  border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .btn-secondary:hover, 
@@ -252,8 +260,7 @@ button[onClick*="onBack"] {
 button[onClick*="onBack"]:hover {
   background: rgba(255, 255, 255, 0.1);
   color: white;
-  border-color: var(--border-hover);
-  transform: translateX(-3px);
+  border-color: rgba(255, 255, 255, 0.22);
 }
 
 /* Input Base Styles */
@@ -446,18 +453,18 @@ input::placeholder {
 /* Button Variants */
 .btn {
   font-family: 'Inter', sans-serif;
-  font-size: 1rem;
+  font-size: 0.92rem;
   font-weight: 600;
   border: none;
   border-radius: var(--border-radius);
   cursor: pointer;
-  transition: all var(--transition-normal);
-  padding: 12px 24px;
+  transition: all var(--transition-fast);
+  padding: 8px 18px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  min-height: 44px;
+  min-height: 38px;
   white-space: nowrap;
 }
 
@@ -467,15 +474,17 @@ input::placeholder {
 }
 
 .btn-lg {
-  padding: 14px 28px;
-  font-size: 1.1rem;
-  min-height: 48px;
+  padding: 12px 24px;
+  font-size: 1rem;
+  min-height: 44px;
+  border-radius: 10px;
 }
 
 .btn-sm {
-  padding: 8px 16px;
-  font-size: 0.9rem;
-  min-height: 36px;
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  min-height: 32px;
+  border-radius: 6px;
 }
 
 .btn-block {
@@ -483,15 +492,17 @@ input::placeholder {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+  background: #2563eb;
   color: white;
-  border: none;
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  border: 1px solid #3b82f6;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 .btn-primary:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
+  background: #1d4ed8;
+  border-color: #60a5fa;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.35);
+  transform: translateY(-1px);
 }
 
 .btn-primary:active:not(:disabled) {
@@ -499,17 +510,14 @@ input::placeholder {
 }
 
 .btn-secondary {
-  background: rgba(255, 255, 255, 0.07);
-  color: var(--text-primary);
-  border: 1px solid var(--border-color);
-  backdrop-filter: blur(12px) saturate(160%);
-  -webkit-backdrop-filter: blur(12px) saturate(160%);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  color: #e2e8f0;
+  border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .btn-secondary:hover:not(:disabled) {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.22);
   color: white;
   transform: translateY(-1px);
 }

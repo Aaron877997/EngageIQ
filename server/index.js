@@ -9,6 +9,8 @@ const timelineRoutes = require("./routes/engagementTimeline");
 const sentimentRoutes = require("./routes/sentimentAnalytics");
 const exportRoutes = require("./routes/exportReport");
 const companyRoutes = require("./routes/CompanyRoutes");
+const postOptimizerRoutes = require("./routes/postOptimizer");
+const mlRoutes = require("./routes/mlRoutes");
 
 const { predictEngagement } = require("../ml/engagementPredictor");
 
@@ -25,6 +27,8 @@ app.use("/api", recommendationRoutes);
 app.use("/api", timelineRoutes);
 app.use("/api", sentimentRoutes);
 app.use("/api", exportRoutes);
+app.use("/api", postOptimizerRoutes);
+app.use("/api", mlRoutes);
 
 app.use("/api/companies", companyRoutes);
 

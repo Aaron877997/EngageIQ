@@ -1,0 +1,23 @@
+{
+  "framework": "Scikit-Learn GradientBoostingRegressor",
+  "r2_score": 0.9999,
+  "mae": 0.16,
+  "sample_count": 12,
+  "feature_importances": [
+    0.0044,
+    0.8175,
+    0.0021,
+    0.0251,
+    0.0052,
+    0.0,
+    0.0,
+    0.0015,
+    0.0,
+    0.1294,
+    0.0122,
+    0.0016,
+    0.0001,
+    0.0,
+    0.001
+  ]
+}

@@ -38,7 +38,13 @@ function LineChart({ connectedPlatforms }) {
     <div className="chart-container">
       <h3>Engagement Over Time</h3>
 
-      <svg width={width} height={height}>
+      <svg
+        width={width}
+        height={height}
+        viewBox={`0 0 ${width} ${height}`}
+        className="line-chart-svg"
+        style={{ width: '100%', height: 'auto', maxHeight: '220px', display: 'block', margin: '0 auto' }}
+      >
         <path d={path} fill="none" stroke="#0a66c2" strokeWidth="2" />
 
         {points.map((p, i) => (

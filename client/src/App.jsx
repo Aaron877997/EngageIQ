@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Routes, Route, useNavigate, useLocation, Navigate } from 'react-router-dom'
 import AppShell from './components/AppShell'
 
 // Existing pages
@@ -9,7 +10,7 @@ import Recommendations from './pages/Recommendations'
 import ExportReport from './pages/ExportReport'
 import Landing from './LandingPage/Landing.jsx'
 
-// NEW components
+// Components
 import HomePage from './components/HomePage'
 import LinkedInConnect from './components/LinkedInConnect'
 import CompanyTables from './components/CompanyTables'
@@ -21,23 +22,22 @@ import CompanyAnalysis from './components/CompanyAnalysis'
 
 import './styles/App.css'
 
-const INITIAL_SCREEN = 'landing'
-const VALID_SCREENS = new Set([
-  'landing',
-  'login',
-  'dashboard',
-  'ai-query',
-  'recommendations',
-  'export',
-  'home',
-  'linkedin-connect',
-  'company-tables',
-  'company-dashboard',
-  'company-cards',
-  'linkedin-dashboard',
-  'engagement-analysis',
-  'company-analysis'
-])
+const ROUTE_MAP = {
+  landing: '/',
+  login: '/login',
+  home: '/home',
+  dashboard: '/dashboard',
+  'ai-query': '/ai-query',
+  recommendations: '/recommendations',
+  export: '/export',
+  'linkedin-connect': '/linkedin-connect',
+  'company-tables': '/company-tables',
+  'company-dashboard': '/company-dashboard',
+  'company-cards': '/company-cards',
+  'linkedin-dashboard': '/linkedin-dashboard',
+  'engagement-analysis': '/engagement-analysis',
+  'company-analysis': '/company-analysis',
+}
 
 const isPlainObject = (value) =>
   value !== null && typeof value === 'object' && !Array.isArray(value)
@@ -69,26 +69,6 @@ const readJsonStorage = (key, fallback) => {
     console.warn(`Ignoring malformed localStorage key "${key}"`, error)
     return fallback
   }
-}
-
-const normalizeScreen = (screen) =>
-  VALID_SCREENS.has(screen) ? screen : INITIAL_SCREEN
-
-const readInitialScreen = () =>
-  normalizeScreen(readStorageValue('currentScreen') || INITIAL_SCREEN)
-
-const readInitialHistory = (currentScreen) => {
-  const saved = readJsonStorage('screenHistory', [currentScreen])
-  const history = Array.isArray(saved)
-    ? saved.filter((screen) => VALID_SCREENS.has(screen))
-    : []
-
-  if (history.length === 0) return [currentScreen]
-  if (history[history.length - 1] !== currentScreen) {
-    return [currentScreen]
-  }
-
-  return history
 }
 
 const readConnectedPlatforms = () => {
@@ -130,7 +110,7 @@ class ScreenErrorBoundary extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.screen !== this.props.screen && this.state.hasError) {
+    if (prevProps.location?.pathname !== this.props.location?.pathname && this.state.hasError) {
       this.setState({ hasError: false, error: null })
     }
   }
@@ -162,86 +142,10 @@ class ScreenErrorBoundary extends React.Component {
   }
 }
 
-function ScreenView({
-  currentScreen,
-  navigateTo,
-  goBack,
-  connectedPlatforms,
-  setConnectedPlatforms,
-  companies,
-  setCompanies,
-  selectedCompany,
-  setSelectedCompany
-}) {
-  switch (currentScreen) {
-    case 'landing':
-      return <Landing onNavigate={navigateTo} />
+function AppContent() {
+  const navigate = useNavigate()
+  const location = useLocation()
 
-    case 'login':
-      return (
-        <Login
-          onConnect={(platforms) => {
-            setConnectedPlatforms(platforms)
-            navigateTo('home')
-          }}
-          onBack={goBack}
-        />
-      )
-
-    case 'dashboard':
-      return (
-        <Dashboard
-          onNavigate={navigateTo}
-          onBack={goBack}
-          connectedPlatforms={connectedPlatforms}
-        />
-      )
-
-    case 'ai-query':
-      return <AIQuery onNavigate={navigateTo} onBack={goBack} connectedPlatforms={connectedPlatforms} />
-
-    case 'recommendations':
-      return <Recommendations onNavigate={navigateTo} onBack={goBack} connectedPlatforms={connectedPlatforms} />
-
-    case 'export':
-      return <ExportReport onNavigate={navigateTo} onBack={goBack} />
-
-    case 'home':
-      return <HomePage onNavigate={navigateTo} onBack={goBack} onConnect={(platforms) => setConnectedPlatforms(platforms)} />
-
-    case 'linkedin-connect':
-      return <LinkedInConnect onNavigate={navigateTo} onBack={goBack} onSetCompanies={setCompanies} />
-
-    case 'company-tables':
-      return <CompanyTables companies={companies} onNavigate={navigateTo} onBack={goBack} />
-
-    case 'company-dashboard':
-      return <CompanyDashboard onNavigate={navigateTo} onBack={goBack} />
-
-    case 'company-cards':
-      return <CompanyCards onNavigate={navigateTo} onBack={goBack} />
-
-    case 'linkedin-dashboard':
-      return <LinkedInDashboard onNavigate={navigateTo} onBack={goBack} />
-
-    case 'engagement-analysis':
-      return <EngagementAnalysis onNavigate={navigateTo} onBack={goBack} selectedCompany={selectedCompany} />
-
-    case 'company-analysis':
-      return <CompanyAnalysis onNavigate={navigateTo} onBack={goBack} companies={companies} onSetSelectedCompany={setSelectedCompany} />
-
-    default:
-      return <Landing onNavigate={navigateTo} />
-  }
-}
-
-function App() {
-  const [currentScreen, setCurrentScreen] = useState(() => {
-    return readInitialScreen()
-  })
-  const [screenHistory, setScreenHistory] = useState(() => {
-    return readInitialHistory(currentScreen)
-  })
   const [connectedPlatforms, setConnectedPlatforms] = useState(() => {
     return readConnectedPlatforms()
   })
@@ -253,14 +157,6 @@ function App() {
   })
 
   useEffect(() => {
-    writeStorageValue('currentScreen', currentScreen)
-  }, [currentScreen])
-
-  useEffect(() => {
-    writeStorageValue('screenHistory', JSON.stringify(screenHistory))
-  }, [screenHistory])
-
-  useEffect(() => {
     writeStorageValue('connectedPlatforms', JSON.stringify(connectedPlatforms))
   }, [connectedPlatforms])
 
@@ -268,52 +164,147 @@ function App() {
     writeStorageValue('companies', JSON.stringify(companies))
   }, [companies])
 
-  const navigateTo = (screen) => {
-    const nextScreen = normalizeScreen(screen)
-    setScreenHistory(prev => {
-      const history = Array.isArray(prev)
-        ? prev.filter((item) => VALID_SCREENS.has(item))
-        : [currentScreen]
+  useEffect(() => {
+    writeStorageValue('selectedCompany', JSON.stringify(selectedCompany))
+  }, [selectedCompany])
 
-      return [...history, nextScreen]
-    })
-    setCurrentScreen(nextScreen)
+  const navigateTo = (screen, options = {}) => {
+    if (typeof screen !== 'string') return
+    const path = screen.startsWith('/') ? screen : (ROUTE_MAP[screen] || `/${screen}`)
+    navigate(path, { state: options })
   }
 
   const goBack = () => {
-    const history = Array.isArray(screenHistory)
-      ? screenHistory.filter((screen) => VALID_SCREENS.has(screen))
-      : []
-
-    if (history.length > 1) {
-      const newHistory = [...history]
-      newHistory.pop()
-      setScreenHistory(newHistory)
-      setCurrentScreen(newHistory[newHistory.length - 1])
-      return
+    if (window.history.length > 1) {
+      navigate(-1)
+    } else {
+      navigate('/')
     }
-
-    setScreenHistory([INITIAL_SCREEN])
-    setCurrentScreen(INITIAL_SCREEN)
   }
 
   return (
     <div className="app">
-      <ScreenErrorBoundary screen={currentScreen} onReset={() => navigateTo(INITIAL_SCREEN)}>
-        <ScreenView
-          currentScreen={currentScreen}
-          navigateTo={navigateTo}
-          goBack={goBack}
-          connectedPlatforms={connectedPlatforms}
-          setConnectedPlatforms={setConnectedPlatforms}
-          companies={companies}
-          setCompanies={setCompanies}
-          selectedCompany={selectedCompany}
-          setSelectedCompany={setSelectedCompany}
-        />
+      <ScreenErrorBoundary location={location} onReset={() => navigate('/')}>
+        <Routes>
+          <Route path="/" element={<Landing onNavigate={navigateTo} />} />
+          <Route
+            path="/login"
+            element={
+              <Login
+                onConnect={(platforms) => {
+                  setConnectedPlatforms(platforms)
+                  navigateTo('home')
+                }}
+                onBack={goBack}
+              />
+            }
+          />
+          <Route
+            path="/home"
+            element={
+              <HomePage
+                onNavigate={navigateTo}
+                onBack={goBack}
+                onConnect={(platforms) => setConnectedPlatforms(platforms)}
+              />
+            }
+          />
+          <Route
+            path="/dashboard"
+            element={
+              <Dashboard
+                onNavigate={navigateTo}
+                onBack={goBack}
+                connectedPlatforms={connectedPlatforms}
+              />
+            }
+          />
+          <Route
+            path="/ai-query"
+            element={
+              <AIQuery
+                onNavigate={navigateTo}
+                onBack={goBack}
+                connectedPlatforms={connectedPlatforms}
+              />
+            }
+          />
+          <Route
+            path="/recommendations"
+            element={
+              <Recommendations
+                onNavigate={navigateTo}
+                onBack={goBack}
+                connectedPlatforms={connectedPlatforms}
+              />
+            }
+          />
+          <Route
+            path="/export"
+            element={<ExportReport onNavigate={navigateTo} onBack={goBack} />}
+          />
+          <Route
+            path="/linkedin-connect"
+            element={
+              <LinkedInConnect
+                onNavigate={navigateTo}
+                onBack={goBack}
+                onSetCompanies={setCompanies}
+              />
+            }
+          />
+          <Route
+            path="/company-tables"
+            element={
+              <CompanyTables
+                companies={companies}
+                onNavigate={navigateTo}
+                onBack={goBack}
+              />
+            }
+          />
+          <Route
+            path="/company-dashboard"
+            element={<CompanyDashboard onNavigate={navigateTo} onBack={goBack} />}
+          />
+          <Route
+            path="/company-cards"
+            element={<CompanyCards onNavigate={navigateTo} onBack={goBack} />}
+          />
+          <Route
+            path="/linkedin-dashboard"
+            element={<LinkedInDashboard onNavigate={navigateTo} onBack={goBack} />}
+          />
+          <Route
+            path="/engagement-analysis"
+            element={
+              <EngagementAnalysis
+                onNavigate={navigateTo}
+                onBack={goBack}
+                selectedCompany={selectedCompany}
+              />
+            }
+          />
+          <Route
+            path="/company-analysis"
+            element={
+              <CompanyAnalysis
+                onNavigate={navigateTo}
+                onBack={goBack}
+                companies={companies}
+                onSetSelectedCompany={setSelectedCompany}
+              />
+            }
+          />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
       </ScreenErrorBoundary>
     </div>
   )
+}
+
+function App() {
+  return <AppContent />
 }
 
 export default App

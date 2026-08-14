@@ -20,13 +20,16 @@
 
 .dashboard-page .visuals-section {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
-  gap: 1rem;
-  flex: 1;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
 }
 
 .dashboard-page .visuals-section .chart-container {
   padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 280px;
 }
 
 .dashboard-page .insights-section {

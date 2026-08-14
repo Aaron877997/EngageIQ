@@ -1,0 +1,227 @@
+{
+  "api_version": "v18.0",
+  "generated_at": "2024-03-15T14:30:00Z",
+  "status": "success",
+  "platforms": {
+    "instagram": {
+      "platform_id": "meta_instagram_business",
+      "name": "Instagram Business",
+      "icon": "📸",
+      "account_metrics": {
+        "follower_count": 18450,
+        "following_count": 420,
+        "media_count": 312,
+        "avg_engagement_rate": "4.82%",
+        "profile_views_28d": 14200,
+        "website_clicks_28d": 1890
+      },
+      "bestPostingTimes": [
+        { "slot": "6:00 PM – 8:30 PM", "days": "Wed, Thu, Fri", "confidence": "94%" },
+        { "slot": "12:00 PM – 2:00 PM", "days": "Mon, Tue", "confidence": "86%" }
+      ],
+      "bestContentTypes": [
+        "Reels (Vertical 9:16, 15-30s)",
+        "Carousels (5-8 educational slides)",
+        "High-contrast 4:5 Vertical Static"
+      ],
+      "trendingTopics": [
+        {
+          "topic": "AI Workflow Automation",
+          "volume": "1.4M posts",
+          "growth": "+58.4% this week",
+          "recommendedFormat": "Reels (15-30s)",
+          "category": "Technology & SaaS",
+          "hashtags": ["#AIAutomation", "#FutureOfWork", "#TechTrends", "#ProductivityHacks"]
+        },
+        {
+          "topic": "Minimalist UI/UX & Dark Mode Systems",
+          "volume": "890K posts",
+          "growth": "+42.1% this week",
+          "recommendedFormat": "Carousels (5-8 slides)",
+          "category": "Design & UI/UX",
+          "hashtags": ["#UIUXDesign", "#DesignSystem", "#WebDesign", "#Figma"]
+        },
+        {
+          "topic": "Micro-SaaS & Solopreneur Growth",
+          "volume": "620K posts",
+          "growth": "+36.7% this week",
+          "recommendedFormat": "Reels with voiceover",
+          "category": "Business & Startups",
+          "hashtags": ["#Solopreneur", "#BuildInPublic", "#SaaSGrowth", "#StartupLife"]
+        },
+        {
+          "topic": "Short-Form Tech Tutorials & Live Demos",
+          "volume": "1.8M posts",
+          "growth": "+65.2% this week",
+          "recommendedFormat": "Reels with code zooms",
+          "category": "Software Engineering",
+          "hashtags": ["#DevCommunity", "#CodingTips", "#WebDevelopment", "#PythonCode"]
+        }
+      ],
+      "topHashtags": ["#TechTrends", "#AIInnovation", "#ReelsViral", "#Productivity", "#WebDev", "#DesignInspo"]
+    },
+    "twitter": {
+      "platform_id": "x_twitter_v2_enterprise",
+      "name": "X (Twitter)",
+      "icon": "𝕏",
+      "account_metrics": {
+        "follower_count": 24800,
+        "tweet_count": 1840,
+        "avg_engagement_rate": "3.64%",
+        "impressions_28d": 384000,
+        "profile_visits_28d": 21300,
+        "mentions_28d": 1280
+      },
+      "bestPostingTimes": [
+        { "slot": "8:00 AM – 10:00 AM", "days": "Tue, Wed, Thu", "confidence": "91%" },
+        { "slot": "6:00 PM – 8:30 PM", "days": "Mon, Fri", "confidence": "88%" }
+      ],
+      "bestContentTypes": [
+        "Thread with Video Demo",
+        "Short Punchy Take (<180 chars)",
+        "Infographic with Data Breakdown"
+      ],
+      "trendingTopics": [
+        {
+          "topic": "Generative AI Agents & Multi-Modal Models",
+          "volume": "2.9M tweets",
+          "growth": "+82.5% this week",
+          "recommendedFormat": "Thread with screen recording",
+          "category": "Artificial Intelligence",
+          "hashtags": ["#AIAgents", "#GenerativeAI", "#OpenSource", "#MachineLearning"]
+        },
+        {
+          "topic": "NextGen Web Frameworks & Rust Tooling",
+          "volume": "740K tweets",
+          "growth": "+29.0% this week",
+          "recommendedFormat": "Bite-sized benchmarks",
+          "category": "Software Development",
+          "hashtags": ["#RustLang", "#FullStack", "#TypeScript", "#WebPerf"]
+        },
+        {
+          "topic": "Bootstrapping to $100k ARR",
+          "volume": "510K tweets",
+          "growth": "+34.3% this week",
+          "recommendedFormat": "Numbered case study thread",
+          "category": "Indie Business",
+          "hashtags": ["#BuildInPublic", "#IndieHacker", "#SaaS"]
+        },
+        {
+          "topic": "Remote Engineering Culture & Async Work",
+          "volume": "430K tweets",
+          "growth": "+21.4% this week",
+          "recommendedFormat": "Question hook + debate",
+          "category": "Workplace Culture",
+          "hashtags": ["#RemoteWork", "#EngineeringManagement", "#TechCareers"]
+        }
+      ],
+      "topHashtags": ["#BuildInPublic", "#AI", "#TechNews", "#DevTwitter", "#SaaS", "#OpenSource"]
+    },
+    "linkedin": {
+      "platform_id": "linkedin_organization_v2",
+      "name": "LinkedIn Page",
+      "icon": "🔗",
+      "account_metrics": {
+        "follower_count": 15600,
+        "page_views_28d": 19400,
+        "unique_visitors_28d": 8750,
+        "avg_engagement_rate": "5.41%",
+        "custom_button_clicks": 940,
+        "search_appearances_28d": 14200
+      },
+      "bestPostingTimes": [
+        { "slot": "7:30 AM – 9:30 AM", "days": "Tue, Wed, Thu", "confidence": "96%" },
+        { "slot": "4:00 PM – 6:00 PM", "days": "Mon, Wed", "confidence": "84%" }
+      ],
+      "bestContentTypes": [
+        "Executive Video Insights (30-60s)",
+        "Document PDF Slide Decks",
+        "Case Studies with Business Metrics"
+      ],
+      "trendingTopics": [
+        {
+          "topic": "AI Implementation in Enterprise Workflows",
+          "volume": "950K engagements",
+          "growth": "+74.2% this week",
+          "recommendedFormat": "Document PDF Carousel or Video",
+          "category": "Enterprise Technology",
+          "hashtags": ["#EnterpriseAI", "#DigitalTransformation", "#Innovation", "#Leadership"]
+        },
+        {
+          "topic": "Empathetic Leadership & High-Retention Teams",
+          "volume": "620K engagements",
+          "growth": "+38.6% this week",
+          "recommendedFormat": "Structured story with takeaway bullets",
+          "category": "Leadership & Management",
+          "hashtags": ["#Leadership", "#Management", "#EmployeeRetention", "#Culture"]
+        },
+        {
+          "topic": "B2B Social Selling & Organic Reach Mastery",
+          "volume": "480K engagements",
+          "growth": "+45.0% this week",
+          "recommendedFormat": "Case study with data metrics",
+          "category": "B2B Marketing & Sales",
+          "hashtags": ["#B2BMarketing", "#SocialSelling", "#GrowthStrategy"]
+        },
+        {
+          "topic": "Data-Driven Product Management",
+          "volume": "390K engagements",
+          "growth": "+27.8% this week",
+          "recommendedFormat": "Framework diagram + insights",
+          "category": "Product Management",
+          "hashtags": ["#ProductManagement", "#DataAnalytics", "#ProductLedGrowth"]
+        }
+      ],
+      "topHashtags": ["#Leadership", "#FutureOfWork", "#Innovation", "#AI", "#Strategy", "#B2BMarketing"]
+    },
+    "facebook": {
+      "platform_id": "meta_facebook_page_v18",
+      "name": "Facebook Page",
+      "icon": "👥",
+      "account_metrics": {
+        "page_likes": 32100,
+        "page_followers": 35400,
+        "avg_engagement_rate": "3.12%",
+        "post_reach_28d": 145000,
+        "post_engagement_28d": 24800,
+        "video_views_3s_28d": 89000
+      },
+      "bestPostingTimes": [
+        { "slot": "6:30 PM – 9:00 PM", "days": "Thu, Fri, Sat", "confidence": "89%" },
+        { "slot": "10:00 AM – 12:00 PM", "days": "Sun, Wed", "confidence": "81%" }
+      ],
+      "bestContentTypes": [
+        "Community & Customer Spotlight Videos",
+        "Interactive Live Q&A Sessions",
+        "High-res Photo Story Albums"
+      ],
+      "trendingTopics": [
+        {
+          "topic": "Community Stories & Local Business Spotlights",
+          "volume": "1.1M interactions",
+          "growth": "+31.2% this week",
+          "recommendedFormat": "High-quality video recap",
+          "category": "Community & Small Business",
+          "hashtags": ["#CommunityFirst", "#SmallBusiness", "#SuccessStory"]
+        },
+        {
+          "topic": "Tech for Everyone & Practical AI Guides",
+          "volume": "820K interactions",
+          "growth": "+49.5% this week",
+          "recommendedFormat": "Step-by-step video tutorial",
+          "category": "Consumer Tech & How-To",
+          "hashtags": ["#TechTips", "#AIForEveryone", "#HowTo"]
+        },
+        {
+          "topic": "Work-Life Balance & Wellness for Creators",
+          "volume": "540K interactions",
+          "growth": "+25.1% this week",
+          "recommendedFormat": "Relatable quote visual or short video",
+          "category": "Lifestyle & Creator Economy",
+          "hashtags": ["#Wellness", "#Productivity", "#CreatorEconomy"]
+        }
+      ],
+      "topHashtags": ["#TechNews", "#Community", "#VideoHighlights", "#Innovation", "#AI"]
+    }
+  }
+}

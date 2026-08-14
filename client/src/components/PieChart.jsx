@@ -55,7 +55,13 @@ function PieChart({ connectedPlatforms }) {
     <div className="chart-container">
       <h3>Sentiment Distribution</h3>
 
-      <svg width="200" height="200">
+      <svg
+        width="200"
+        height="200"
+        viewBox="0 0 200 200"
+        className="pie-chart-svg"
+        style={{ width: '100%', height: 'auto', maxHeight: '200px', display: 'block', margin: '0 auto' }}
+      >
         {segments.map((seg, i) => {
           const startAngle = (cumulative / total) * 360
           const endAngle =
