@@ -1,33 +1,36 @@
-//this is server/routes/platformAnalytics.js
+// server/routes/platformAnalytics.js
+const express = require('express');
+const router = express.Router();
+const { fetchConjugatePosts } = require('../utils/conjugateClient');
 
-const express = require('express')
-const router = express.Router()
-const fs = require('fs')
-const csv = require('csv-parser')
+router.get('/platforms', async (req, res) => {
+  try {
+    const userEmail = req.headers['x-user-email'] || req.query.userEmail || req.headers['x-user-id'] || req.query.userId || 'default_user';
+    const platformsParam = req.query.platforms?.split(',').map(p => {
+      let lower = p.toLowerCase();
+      return lower === 'x' ? 'twitter' : lower;
+    }).filter(Boolean) || [];
 
-router.get('/platforms', (req, res) => {
-  const data = {}
+    const posts = await fetchConjugatePosts(userEmail);
+    const data = {};
 
-  fs.createReadStream('data/social_media.csv')
-    .pipe(csv())
-    .on('data', row => {
-      const platforms = req.query.platforms?.split(',').map(p => {
-        let lower = p.toLowerCase();
-        return lower === 'x' ? 'twitter' : lower;
-      }) || [];
-      if (platforms.length && !platforms.includes((row.platform || "").toLowerCase())) return;
+    posts.forEach(row => {
+      const plat = (row.platform || 'instagram').toLowerCase().replace('x', 'twitter');
+      if (platformsParam.length && !platformsParam.includes(plat)) return;
 
-      const platform = row.platform
       const engagement =
-        Number(row.likes || 0) +
-        Number(row.comments || 0) +
-        Number(row.shares || 0)
+        Number(row.metrics?.likes || row.likes || 0) +
+        Number(row.metrics?.comments || row.comments || 0) +
+        Number(row.metrics?.shares || row.shares || 0);
 
-      data[platform] = (data[platform] || 0) + engagement
-    })
-    .on('end', () => {
-      res.json(data)
-    })
-})
+      data[plat] = (data[plat] || 0) + engagement;
+    });
 
-module.exports = router
+    res.json(data);
+  } catch (error) {
+    console.error('Platform Analytics Error:', error);
+    res.status(500).json({ error: 'Failed to retrieve platform analytics.' });
+  }
+});
+
+module.exports = router;

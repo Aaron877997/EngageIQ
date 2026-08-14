@@ -202,21 +202,53 @@ function solveGaussian(A, b) {
   return x;
 }
 
+const CONJUGATE_STORE_PATH = path.join(__dirname, '../conjugate-media/server/data/live_store.json');
+const CONJUGATE_SEED_PATH = path.join(__dirname, '../conjugate-media/server/data/default_seed.json');
+
 /**
- * Load training data from JSON platform feed & CSV and Train Model
+ * Load training data from Conjugate Media live feed & JSON platform feed and Train Model
  */
 function trainModelOnPastPosts() {
   const trainingSamples = [];
   const targetScores = [];
 
-  // 1. Ingest JSON platform feed
+  // 1. Ingest live Conjugate Media store
+  try {
+    let conjugatePosts = [];
+    if (fs.existsSync(CONJUGATE_STORE_PATH)) {
+      const storeData = JSON.parse(fs.readFileSync(CONJUGATE_STORE_PATH, 'utf-8'));
+      Object.values(storeData).forEach(uBucket => {
+        if (uBucket && uBucket.posts) conjugatePosts.push(...uBucket.posts);
+      });
+    } else if (fs.existsSync(CONJUGATE_SEED_PATH)) {
+      const seedData = JSON.parse(fs.readFileSync(CONJUGATE_SEED_PATH, 'utf-8'));
+      conjugatePosts = seedData.posts || [];
+    }
+
+    conjugatePosts.forEach(post => {
+      const feats = extractFeatures(post);
+      let score = post.metrics?.engagementScore || post.engagement_score;
+      if (!score && post.metrics) {
+        const l = Number(post.metrics.likes || 0);
+        const c = Number(post.metrics.comments || 0);
+        const s = Number(post.metrics.shares || 0);
+        const r = Number(post.metrics.reach || 10000);
+        score = Math.round(Math.min(98, Math.max(30, ((l + c * 2 + s * 3) / r) * 1200)));
+      }
+      trainingSamples.push(feats);
+      targetScores.push(score || 75);
+    });
+  } catch (e) {
+    console.warn('[ML Trainer] Warning: Could not ingest Conjugate Media store:', e.message);
+  }
+
+  // 2. Ingest JSON platform feed
   if (fs.existsSync(JSON_FEED_PATH)) {
     try {
       const jsonContent = JSON.parse(fs.readFileSync(JSON_FEED_PATH, 'utf-8'));
       const posts = jsonContent.posts || [];
       posts.forEach(post => {
         const feats = extractFeatures(post);
-        // Calculate ground truth score from metrics if not explicitly set
         let score = post.engagement_score;
         if (!score && post.metrics) {
           const l = Number(post.metrics.likes || 0);

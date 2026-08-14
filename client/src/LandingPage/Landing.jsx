@@ -52,7 +52,7 @@ const STATS = [
   { number: "99.9%", label: "Uptime" }
 ];
 
-const Landing = ({ onNavigate }) => {
+const Landing = ({ onNavigate, onStartDemo, showToast }) => {
     const [loginStatus, setLoginStatus] = useState(false);
     const [registerStatus, setRegisterStatus] = useState(false);
     const [loginError, setLoginError] = useState(null)
@@ -77,15 +77,44 @@ const Landing = ({ onNavigate }) => {
       return () => unsub()
     }, [])
 
+    const handleGetStarted = () => {
+      if (user) {
+        onNavigate("home");
+      } else {
+        if (showToast) {
+          showToast('🔒 Please login first or click "View Demo" to explore test data in EngageIQ.', 'warning');
+        }
+        setLoginStatus(true);
+      }
+    };
+
+    const handleViewDemo = () => {
+      if (onStartDemo) {
+        onStartDemo();
+      } else {
+        onNavigate("dashboard");
+      }
+    };
+
     const handleLogin = async (e) => {
         e.preventDefault()
         setLoginError(null)
         setLoginLoading(true)
         const form = e.target
-        const email = form.email?.value
+        const email = form.email?.value?.trim()
         const password = form.password?.value
         try {
+            // 1. Verify that user has an account in Conjugate Media
+            const checkRes = await fetch(`/api/auth/verify-conjugate-account?email=${encodeURIComponent(email)}`)
+            const checkData = await checkRes.json()
+            if (checkData && checkData.hasConjugateAccount === false) {
+                setLoginError(`🚫 No Conjugate Media account found for "${email}". EngageIQ only connects to accounts registered on Conjugate Media. Please create an account on Conjugate Media (http://localhost:5174) first.`)
+                setLoginLoading(false)
+                return
+            }
+
             await signInWithEmailAndPassword(auth, email, password)
+            if (email) localStorage.setItem('userEmail', email)
             onNavigate("home");
             setLoginStatus(false)
         } catch (err) {
@@ -110,57 +139,31 @@ const Landing = ({ onNavigate }) => {
           </div>
           <div className="nav-actions">
             {user ? (
-              <button className="btn btn-secondary" onClick={async () => {
-                try { await signOut(auth); setUser(null) } catch (e) { console.error(e) }
-              }}>Logout</button>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                <div className="landing-user-badge" title={`Logged in as ${user.email}`}>
+                  <span className="landing-user-dot"></span>
+                  <span className="landing-user-email">{user.email}</span>
+                </div>
+                <button
+                  className="btn btn-secondary btn-sm"
+                  onClick={async () => {
+                    try {
+                      await signOut(auth);
+                      setUser(null);
+                      localStorage.removeItem('userEmail');
+                    } catch (e) {
+                      console.error(e);
+                    }
+                  }}
+                >
+                  Logout
+                </button>
+              </div>
             ) : (
-              <button className="btn btn-secondary" onClick={() => { setLoginStatus(true) }}>Login</button>
+              <button className="btn btn-secondary" onClick={() => { setLoginStatus(true); }}>Login</button>
             )}
-            <button className="btn btn-primary" onClick={() => onNavigate("home")}>Get Started</button>
+            <button className="btn btn-primary" onClick={handleGetStarted}>Get Started</button>
           </div>
-
-          {/* Login Modal */}
-          {loginStatus && (
-            <div className="modal-overlay" onClick={() => setLoginStatus(false)}>
-              <div className="modal" onClick={e => e.stopPropagation()}>
-                <button className="modal-close" onClick={() => setLoginStatus(false)}>×</button>
-                <h2 className="modal-title">Login</h2>
-                <form onSubmit={handleLogin}>
-                  <div className="form-group">
-                    <label className="form-label">Email</label>
-                    <input type="email" name="email" className="form-input" required />
-                  </div>
-                  <div className="form-group">
-                    <label className="form-label">Password</label>
-                    <input type="password" name="password" className="form-input" required />
-                  </div>
-                  {loginError && <div className="alert alert-error">{loginError}</div>}
-                  <div className="modal-actions">
-                    <button type="submit" className="btn btn-primary" disabled={loginLoading}>
-                      {loginLoading ? 'Signing in...' : 'Sign in'}
-                    </button>
-                    <button type="button" className="btn btn-secondary" onClick={() => setLoginStatus(false)}>Cancel</button>
-                  </div>
-                  <p className="modal-footer-text">
-                    New user?{' '}
-                    <button type="button" className="link-text" onClick={() => setRegisterStatus(true)}>
-                      Register here
-                    </button>
-                  </p>
-                </form>
-              </div>
-            </div>
-          )}
-
-          {/* Register Modal */}
-          {registerStatus && (
-            <div className="modal-overlay" onClick={() => setRegisterStatus(false)}>
-              <div className="modal" onClick={e => e.stopPropagation()}>
-                <button className="modal-close" onClick={() => setRegisterStatus(false)}>×</button>
-                <Register onClose={() => setRegisterStatus(false)} />
-              </div>
-            </div>
-          )}
         </nav>
 
         {/* Hero Section */}
@@ -169,8 +172,8 @@ const Landing = ({ onNavigate }) => {
             <h1>Turn Social Media Data Into <span>Actionable Intelligence</span></h1>
             <p>Analyze performance, understand your audience, and make smarter content decisions using real-time social media insights — all from one powerful dashboard.</p>
             <div className="hero-actions">
-              <button className="btn btn-primary btn-lg" onClick={() => onNavigate("home")}>Get Started Free</button>
-              <button className="btn btn-secondary btn-lg">View Demo</button>
+              <button className="btn btn-primary btn-lg" onClick={handleGetStarted}>Get Started Free</button>
+              <button className="btn btn-secondary btn-lg" onClick={handleViewDemo}>View Demo</button>
             </div>
           </div>
           <div className="hero-stats">
@@ -253,7 +256,7 @@ const Landing = ({ onNavigate }) => {
         <section className="cta-section">
           <h2>Ready to Grow Your Social Media Presence?</h2>
           <p>Start analyzing your social media data today. Free for the first 30 days.</p>
-          <button className="btn btn-primary btn-lg" onClick={() => onNavigate("home")}>Get Started Now</button>
+          <button className="btn btn-primary btn-lg" onClick={handleGetStarted}>Get Started Now</button>
         </section>
 
         {/* Footer */}
@@ -295,6 +298,101 @@ const Landing = ({ onNavigate }) => {
             <p>&copy; 2026 EngageIQ. All rights reserved. | Built for Social Media Analytics</p>
           </div>
         </footer>
+
+        {/* ── Login Modal ── */}
+        {loginStatus && (
+          <div className="landing-auth-overlay" onClick={() => setLoginStatus(false)}>
+            <div className="landing-auth-modal" onClick={(e) => e.stopPropagation()}>
+              <button
+                type="button"
+                className="landing-modal-close"
+                onClick={() => setLoginStatus(false)}
+                aria-label="Close"
+              >
+                ✕
+              </button>
+              <div className="landing-modal-header">
+                <h2>Welcome Back</h2>
+                <p>Sign in to access your social media intelligence suite</p>
+              </div>
+              <form onSubmit={handleLogin} className="landing-auth-form">
+                <div className="landing-form-group">
+                  <label className="landing-form-label">Email Address</label>
+                  <input
+                    type="email"
+                    name="email"
+                    className="landing-form-input"
+                    placeholder="name@example.com"
+                    required
+                  />
+                </div>
+                <div className="landing-form-group">
+                  <label className="landing-form-label">Password</label>
+                  <input
+                    type="password"
+                    name="password"
+                    className="landing-form-input"
+                    placeholder="••••••••"
+                    required
+                  />
+                </div>
+                {loginError && <div className="alert alert-error">{loginError}</div>}
+                <div className="landing-modal-actions">
+                  <button
+                    type="button"
+                    className="btn btn-secondary"
+                    onClick={() => setLoginStatus(false)}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="btn btn-primary"
+                    disabled={loginLoading}
+                  >
+                    {loginLoading ? 'Signing in...' : 'Sign In'}
+                  </button>
+                </div>
+                <p className="landing-modal-footer-text">
+                  Don't have an account?{' '}
+                  <button
+                    type="button"
+                    className="link-text"
+                    onClick={() => {
+                      setLoginStatus(false);
+                      setRegisterStatus(true);
+                    }}
+                  >
+                    Register here
+                  </button>
+                </p>
+              </form>
+            </div>
+          </div>
+        )}
+
+        {/* ── Register Modal ── */}
+        {registerStatus && (
+          <div className="landing-auth-overlay" onClick={() => setRegisterStatus(false)}>
+            <div className="landing-auth-modal" onClick={(e) => e.stopPropagation()}>
+              <button
+                type="button"
+                className="landing-modal-close"
+                onClick={() => setRegisterStatus(false)}
+                aria-label="Close"
+              >
+                ✕
+              </button>
+              <Register
+                onClose={() => setRegisterStatus(false)}
+                onSwitchToLogin={() => {
+                  setRegisterStatus(false);
+                  setLoginStatus(true);
+                }}
+              />
+            </div>
+          </div>
+        )}
       </AppShell>
     )
 }

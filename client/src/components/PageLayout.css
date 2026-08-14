@@ -223,3 +223,55 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* ── Logged-in User Badge ── */
+.page-top__user {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.page-user-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.85rem;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  border-radius: 999px;
+  color: #f1f5f9;
+  font-size: 0.82rem;
+  font-weight: 600;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease;
+}
+
+.page-user-pill:hover {
+  border-color: rgba(56, 189, 248, 0.5);
+  background: rgba(15, 23, 42, 0.95);
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.25);
+}
+
+.page-user-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 8px #10b981;
+  flex-shrink: 0;
+}
+
+.page-user-email {
+  max-width: 220px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.page-logout-btn {
+  padding: 0.35rem 0.75rem !important;
+  font-size: 0.8rem !important;
+  border-radius: 6px !important;
+}

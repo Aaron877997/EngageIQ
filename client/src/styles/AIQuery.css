@@ -492,21 +492,58 @@
   font-size: 0.92rem;
   line-height: 1.65;
   color: #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.resp-paragraph {
+  margin: 0;
+  color: #e2e8f0;
+}
+
+.resp-section-block {
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .resp-h4 {
   color: #60a5fa;
-  margin: 1rem 0 0.4rem;
-  font-size: 0.96rem;
+  margin: 0;
+  font-size: 0.98rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .resp-list {
-  margin: 0.5rem 0;
+  margin: 0;
   padding-left: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .resp-list li {
-  margin-bottom: 4px;
+  margin-bottom: 0;
+  color: #cbd5e1;
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.hashtag-highlight {
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.1);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 0.82rem;
+  margin: 0 2px;
 }
 
 .response-footer-stats {
@@ -963,3 +1000,95 @@
     flex-direction: column;
   }
 }
+
+/* ── Engine Routing Selector & Badges ── */
+.engine-routing-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.engine-routing-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #94a3b8;
+}
+
+.engine-routing-pills {
+  display: flex;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+}
+
+.engine-pill-btn {
+  background: rgba(30, 41, 59, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #cbd5e1;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.3rem 0.75rem;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.engine-pill-btn:hover {
+  background: rgba(51, 65, 85, 0.9);
+  color: #fff;
+}
+
+.engine-pill-btn.active {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.35), rgba(168, 85, 247, 0.35));
+  border-color: #a855f7;
+  color: #fff;
+  box-shadow: 0 0 12px rgba(168, 85, 247, 0.3);
+}
+
+.engine-source-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 0.35rem 0.85rem;
+  border-radius: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.engine-source-badge.gemini {
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.25), rgba(236, 72, 153, 0.25));
+  border: 1px solid rgba(168, 85, 247, 0.5);
+  color: #f472b6;
+  box-shadow: 0 0 15px rgba(236, 72, 153, 0.2);
+}
+
+.engine-source-badge.ml {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.25), rgba(16, 185, 129, 0.25));
+  border: 1px solid rgba(59, 130, 246, 0.5);
+  color: #38bdf8;
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.2);
+}
+
+.prompt-chips-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.prompt-chips-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.prompt-group-tag {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+

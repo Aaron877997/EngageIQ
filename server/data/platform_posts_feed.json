@@ -2,10 +2,58 @@
   "dataset_metadata": {
     "version": "2.4.0",
     "source": "Aggregated Social Media Platform Webhooks (Meta Graph API, X API v2, LinkedIn Marketing)",
-    "last_updated": "2026-08-14T05:19:48.202Z",
-    "total_records": 14
+    "last_updated": "2026-08-14T10:33:57.847Z",
+    "total_records": 16
   },
   "posts": [
+    {
+      "platform": "instagram",
+      "post_type": "video",
+      "caption_text": "Live case study: How AI multi-agent teams scaled our release velocity 4x! Swipe for benchmarks. What do you think? #AI #DevTools",
+      "media_specs": {
+        "aspect_ratio": "9:16",
+        "duration_sec": 24,
+        "has_subtitles": true,
+        "hook_rating": 9,
+        "audio_type": "trending"
+      },
+      "timestamp": "2026-08-14T10:33:57.747Z",
+      "day_of_week": "Thursday",
+      "hour_of_day": 19,
+      "metrics": {
+        "likes": 2192,
+        "comments": 441,
+        "shares": 238,
+        "reach": 52000,
+        "video_views": 48000
+      },
+      "engagement_score": 93,
+      "id": "sync_post_1786703637847_0"
+    },
+    {
+      "platform": "instagram",
+      "post_type": "video",
+      "caption_text": "Live case study: How AI multi-agent teams scaled our release velocity 4x! Swipe for benchmarks. What do you think? #AI #DevTools",
+      "media_specs": {
+        "aspect_ratio": "9:16",
+        "duration_sec": 24,
+        "has_subtitles": true,
+        "hook_rating": 9,
+        "audio_type": "trending"
+      },
+      "timestamp": "2026-08-14T08:40:14.962Z",
+      "day_of_week": "Thursday",
+      "hour_of_day": 19,
+      "metrics": {
+        "likes": 2266,
+        "comments": 372,
+        "shares": 233,
+        "reach": 52000,
+        "video_views": 48000
+      },
+      "engagement_score": 93,
+      "id": "sync_post_1786696815041_0"
+    },
     {
       "platform": "facebook",
       "post_type": "video",

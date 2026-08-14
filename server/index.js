@@ -30,7 +30,24 @@ app.use("/api", exportRoutes);
 app.use("/api", postOptimizerRoutes);
 app.use("/api", mlRoutes);
 
+const { verifyConjugateAccount } = require("./utils/conjugateClient");
+
 app.use("/api/companies", companyRoutes);
+
+// Verify user account exists in Conjugate Media
+app.get("/api/auth/verify-conjugate-account", async (req, res) => {
+  const userEmail = req.query.email || req.query.userEmail || req.headers["x-user-email"];
+  if (!userEmail) {
+    return res.status(400).json({ hasConjugateAccount: false, error: "Email required" });
+  }
+
+  const result = await verifyConjugateAccount(userEmail);
+  return res.json({
+    hasConjugateAccount: result.hasAccount,
+    email: result.email,
+    message: result.message || (result.hasAccount ? "Account connected." : "No Conjugate Media account found.")
+  });
+});
 
 app.post("/api/predict-engagement", (req, res) => {
   try {

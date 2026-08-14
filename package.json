@@ -1,0 +1,13 @@
+{
+  "name": "engageiq-monorepo",
+  "version": "2.0.0",
+  "description": "EngageIQ - AI-Powered Social Media Analyzer with Conjugate Media Control Platform",
+  "private": true,
+  "scripts": {
+    "server": "cd server && npm start",
+    "client": "cd client && npm run dev",
+    "conjugate:server": "cd conjugate-media/server && npm start",
+    "conjugate:client": "cd conjugate-media/client && npm run dev",
+    "build:all": "cd client && npm run build && cd ../conjugate-media/client && npm run build"
+  }
+}

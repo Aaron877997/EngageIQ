@@ -12,6 +12,12 @@ export default defineConfig({
         target: 'http://localhost:5001',
         changeOrigin: true,
         secure: false
+      },
+      '/conjugate-api': {
+        target: 'http://localhost:5002',
+        changeOrigin: true,
+        secure: false,
+        rewrite: (path) => path.replace(/^\/conjugate-api/, '/api')
       }
     }
   }

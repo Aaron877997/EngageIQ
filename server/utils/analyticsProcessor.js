@@ -1,67 +1,67 @@
-//this is server/utils/analyticsProcessor.js
+// server/utils/analyticsProcessor.js
+const { fetchConjugatePosts } = require('./conjugateClient');
 
-const fs = require('fs')
-const csv = require('csv-parser')
-
-function processAnalytics(platforms, callback) {
-
- // Allow calling with ONLY callback
+/**
+ * Process aggregate metrics dynamically from live Conjugate Media posts
+ */
+async function processAnalytics(platforms = [], callback, userId = 'default_user') {
   if (typeof platforms === 'function') {
-    callback = platforms
-    platforms = []
+    callback = platforms;
+    platforms = [];
   }
 
-  const results = []
+  try {
+    const posts = await fetchConjugatePosts(userId);
 
-  const dataPath = require('path').join(__dirname, '../data/social_media.csv');
-  if (!fs.existsSync(dataPath)) {
-    return callback({ likes: 12500, comments: 3200, shares: 850, reach: 45000, engagementRate: '7.2%' });
-  }
+    const lowerPlatforms = (platforms && platforms.length > 0)
+      ? platforms.map(p => {
+          let lower = p.toLowerCase();
+          return lower === 'x' ? 'twitter' : lower;
+        })
+      : [];
 
-  fs.createReadStream(dataPath)
-    .pipe(csv())
-    .on('data', (row) => results.push(row))
-    .on('end', () => {
-      let likes = 0;
-      let comments = 0;
-      let shares = 0;
-      let reach = 0; // Social media csv might not have reach, we'll mock it if missing
+    let likes = 0;
+    let comments = 0;
+    let shares = 0;
+    let reach = 0;
 
-      results.forEach(row => {
-        // filter by connected platforms (case-insensitive)
-        if (platforms.length) {
-          const lowerPlatforms = platforms.map(p => {
-             let lower = p.toLowerCase();
-             if (lower === 'x') return 'twitter';
-             return lower;
-          });
-          const currentPlatform = (row.platform || "").toLowerCase();
-          if (!lowerPlatforms.includes(currentPlatform)) return;
-        }
+    posts.forEach(row => {
+      const currentPlatform = (row.platform || '').toLowerCase().replace('x', 'twitter');
+      if (lowerPlatforms.length > 0 && !lowerPlatforms.includes(currentPlatform)) return;
 
-        likes += Number(row.likes || 0);
-        comments += Number(row.comments || 0);
-        shares += Number(row.shares || 0);
-        reach += 5000; // Mocking reach since it's not in the new CSV
-      });
+      const l = Number(row.metrics?.likes || row.likes || 0);
+      const c = Number(row.metrics?.comments || row.comments || 0);
+      const s = Number(row.metrics?.shares || row.shares || 0);
+      const r = Number(row.metrics?.reach || row.reach || (l + c + s) * 15);
 
-      const engagement = likes + comments + shares;
-      const engagementRate = reach ? ((engagement / reach) * 100).toFixed(2) : 0;
-
-      callback({
-        likes,
-        comments,
-        shares,
-        reach,
-        engagement,
-        engagementRate: engagementRate + '%'
-      });
-    })
-    .on('error', () => {
-       callback({ likes: 12500, comments: 3200, shares: 850, reach: 45000, engagementRate: '7.2%' });
+      likes += l;
+      comments += c;
+      shares += s;
+      reach += r;
     });
+
+    const engagement = likes + comments + shares;
+    const engagementRate = reach > 0 ? ((engagement / reach) * 100).toFixed(2) + '%' : '0%';
+
+    const result = {
+      likes,
+      comments,
+      shares,
+      reach,
+      engagement,
+      engagementRate
+    };
+
+    if (typeof callback === 'function') {
+      callback(result);
+    }
+    return result;
+  } catch (err) {
+    console.error('[Analytics Processor Error]:', err);
+    const fallback = { likes: 0, comments: 0, shares: 0, reach: 0, engagement: 0, engagementRate: '0%' };
+    if (typeof callback === 'function') callback(fallback);
+    return fallback;
+  }
 }
 
-//module.exports = processAnalytics(platformsArray, callback)
-module.exports = processAnalytics
-
+module.exports = processAnalytics;

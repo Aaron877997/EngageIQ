@@ -1,47 +1,54 @@
-import React, { useState } from 'react'
-import { auth } from '../firebase'
-import { createUserWithEmailAndPassword } from 'firebase/auth'
+import React, { useState } from 'react';
+import { auth } from '../firebase';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 
-export default function Register({ onClose }) {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [error, setError] = useState(null)
-  const [loading, setLoading] = useState(false)
+export default function Register({ onClose, onSwitchToLogin }) {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    setError(null)
-    setLoading(true)
+    e.preventDefault();
+    setError(null);
+    setLoading(true);
     try {
-      await createUserWithEmailAndPassword(auth, email, password)
-      if (typeof onClose === 'function') onClose()
+      await createUserWithEmailAndPassword(auth, email, password);
+      if (typeof onClose === 'function') onClose();
     } catch (err) {
-      setError(err.message || 'Registration failed')
+      setError(err.message || 'Registration failed');
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   return (
     <div>
-      <h2 className="modal-title">Create an account</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label className="form-label">Email</label>
+      <div className="landing-modal-header">
+        <h2>Create an Account</h2>
+        <p>Join EngageIQ to start analyzing your cross-platform social media data</p>
+      </div>
+      <form onSubmit={handleSubmit} className="landing-auth-form">
+        <div className="landing-form-group">
+          <label className="landing-form-label">Email Address</label>
           <input
             type="email"
             name="email"
+            className="landing-form-input"
             required
+            placeholder="name@example.com"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
-        <div className="form-group">
-          <label className="form-label">Password</label>
+        <div className="landing-form-group">
+          <label className="landing-form-label">Password</label>
           <input
             type="password"
             name="password"
+            className="landing-form-input"
             required
+            placeholder="••••••••"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
@@ -52,15 +59,31 @@ export default function Register({ onClose }) {
             <div>{error}</div>
           </div>
         )}
-        <div className="modal-actions">
-          <button type="submit" className="btn btn-primary" disabled={loading}>
-            {loading ? 'Creating...' : 'Create account'}
-          </button>
-          <button type="button" className="btn btn-secondary" onClick={() => { if (typeof onClose === 'function') onClose() }}>
+        <div className="landing-modal-actions">
+          <button
+            type="button"
+            className="btn btn-secondary"
+            onClick={() => { if (typeof onClose === 'function') onClose(); }}
+          >
             Cancel
           </button>
+          <button type="submit" className="btn btn-primary" disabled={loading}>
+            {loading ? 'Creating Account...' : 'Create Account'}
+          </button>
         </div>
+        {onSwitchToLogin && (
+          <p className="landing-modal-footer-text">
+            Already have an account?{' '}
+            <button
+              type="button"
+              className="link-text"
+              onClick={onSwitchToLogin}
+            >
+              Sign in here
+            </button>
+          </p>
+        )}
       </form>
     </div>
-  )
+  );
 }

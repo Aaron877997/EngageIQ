@@ -1,0 +1,327 @@
+{
+  "channels": {
+    "instagram": {
+      "platform": "instagram",
+      "name": "EngageIQ Creator Studio",
+      "handle": "@engageiq.official",
+      "category": "Tech & AI Intelligence",
+      "subscribers": 48200,
+      "following": 312,
+      "bio": "Demystifying AI, social media analytics, and multi-modal growth engineering 🚀",
+      "avatar": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=150&auto=format&fit=crop&q=80"
+    },
+    "facebook": {
+      "platform": "facebook",
+      "name": "EngageIQ Community & Growth",
+      "handle": "@EngageIQCommunity",
+      "category": "Software & Digital Creators",
+      "subscribers": 34500,
+      "following": 140,
+      "bio": "Official Facebook Community for social growth hackers and data-driven marketing leaders.",
+      "avatar": "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=150&auto=format&fit=crop&q=80"
+    },
+    "twitter": {
+      "platform": "twitter",
+      "name": "EngageIQ Tech 𝕏",
+      "handle": "@engageiq_ai",
+      "category": "AI Agents & Analytics",
+      "subscribers": 62400,
+      "following": 420,
+      "bio": "Autonomous AI agents, social media growth algorithms, and real-time intelligence benchmarks.",
+      "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80"
+    },
+    "linkedin": {
+      "platform": "linkedin",
+      "name": "EngageIQ Enterprise Intelligence",
+      "handle": "company/engageiq",
+      "category": "B2B Analytics & AI SaaS",
+      "subscribers": 28900,
+      "following": 85,
+      "bio": "Powering next-generation social intelligence and predictive reach analytics for global marketing teams.",
+      "avatar": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&auto=format&fit=crop&q=80"
+    }
+  },
+  "posts": [
+    {
+      "id": "cm_post_ig_1",
+      "platform": "instagram",
+      "postType": "video",
+      "category": "AI & Tech",
+      "caption": "Why vertical video hooks in the first 3 seconds define your entire 30-day reach! Here is the 3-step breakdown top creators use ⬇️ What is your current video retention rate? #ContentStrategy #GrowthHacking #VideoMarketing #EngageIQ",
+      "mediaSpecs": {
+        "aspectRatio": "9:16",
+        "durationSec": 26,
+        "hasSubtitles": true,
+        "hookRating": 9,
+        "hasTextOverlay": true,
+        "audioType": "trending"
+      },
+      "metrics": {
+        "likes": 2840,
+        "comments": 412,
+        "shares": 385,
+        "dislikes": 12,
+        "reach": 64000,
+        "videoViews": 58200,
+        "engagementScore": 94
+      },
+      "subscribers": 48200,
+      "createdAt": "2026-08-14T08:30:00.000Z",
+      "commentsList": [
+        {
+          "id": "c1",
+          "user": "alex_tech",
+          "comment": "This 3-second hook structure changed our retention graph completely! 🔥",
+          "sentiment": "positive",
+          "timestamp": "2026-08-14T09:00:00.000Z"
+        },
+        {
+          "id": "c2",
+          "user": "growth_sam",
+          "comment": "Do you recommend dynamic captions or static title cards?",
+          "sentiment": "neutral",
+          "timestamp": "2026-08-14T09:15:00.000Z"
+        }
+      ]
+    },
+    {
+      "id": "cm_post_ig_2",
+      "platform": "instagram",
+      "postType": "carousel",
+      "category": "Marketing",
+      "caption": "5 Social Media Analytics Mistakes Killing Your Engagement in 2026. Swipe through the full framework to fix them now ➡️ Save this for your next campaign review! #Analytics #InstagramTips #MarketingStrategy",
+      "mediaSpecs": {
+        "aspectRatio": "4:5",
+        "slideCount": 6,
+        "hasTextOverlay": true,
+        "imageType": "carousel"
+      },
+      "metrics": {
+        "likes": 2150,
+        "comments": 298,
+        "shares": 460,
+        "dislikes": 5,
+        "reach": 49000,
+        "videoViews": 0,
+        "engagementScore": 91
+      },
+      "subscribers": 48200,
+      "createdAt": "2026-08-13T17:45:00.000Z",
+      "commentsList": [
+        {
+          "id": "c3",
+          "user": "marketing_pro",
+          "comment": "Slide 4 on dwell time vs likes is pure gold. Saved!",
+          "sentiment": "positive",
+          "timestamp": "2026-08-13T18:00:00.000Z"
+        }
+      ]
+    },
+    {
+      "id": "cm_post_fb_1",
+      "platform": "facebook",
+      "postType": "video",
+      "category": "Business",
+      "caption": "Case Study: How scaling organic community discussions drove a 4x increase in quarterly engagement without paid ads. Watch the full walkthrough below! What strategies have worked best for your group?",
+      "mediaSpecs": {
+        "aspectRatio": "16:9",
+        "durationSec": 45,
+        "hasSubtitles": true,
+        "hookRating": 8,
+        "hasTextOverlay": true,
+        "audioType": "original"
+      },
+      "metrics": {
+        "likes": 1640,
+        "comments": 310,
+        "shares": 245,
+        "dislikes": 18,
+        "reach": 42000,
+        "videoViews": 38000,
+        "engagementScore": 86
+      },
+      "subscribers": 34500,
+      "createdAt": "2026-08-14T04:15:00.000Z",
+      "commentsList": [
+        {
+          "id": "c4",
+          "user": "sarah_biz",
+          "comment": "Community first is truly the winning model for Facebook groups right now.",
+          "sentiment": "positive",
+          "timestamp": "2026-08-14T05:00:00.000Z"
+        }
+      ]
+    },
+    {
+      "id": "cm_post_fb_2",
+      "platform": "facebook",
+      "postType": "text",
+      "category": "Education",
+      "caption": "Question for marketing leaders: What is your #1 metric when evaluating social ROI — Raw Reach, Engagement Rate, or Conversion Click-Through? Share your perspective below 👇",
+      "mediaSpecs": {},
+      "metrics": {
+        "likes": 890,
+        "comments": 240,
+        "shares": 85,
+        "dislikes": 4,
+        "reach": 24000,
+        "videoViews": 0,
+        "engagementScore": 76
+      },
+      "subscribers": 34500,
+      "createdAt": "2026-08-12T14:30:00.000Z",
+      "commentsList": [
+        {
+          "id": "c5",
+          "user": "david_cmo",
+          "comment": "Engagement depth and comment sentiment beat raw vanity reach every day.",
+          "sentiment": "positive",
+          "timestamp": "2026-08-12T15:00:00.000Z"
+        }
+      ]
+    },
+    {
+      "id": "cm_post_tw_1",
+      "platform": "twitter",
+      "postType": "text",
+      "category": "AI & Tech",
+      "caption": "Unpopular opinion: 1 high-effort thread analyzing real data beats 20 generic quote tweets every single time.\n\nHere are the 4 pillars of algorithmic distribution on 𝕏 in 2026:\n1. Dwell time > Replies\n2. Media attachments retain 3x longer\n3. Bookmark velocity\n4. Verified quote reach\n\nAgree or disagree? #BuildInPublic #AI",
+      "mediaSpecs": {},
+      "metrics": {
+        "likes": 3420,
+        "comments": 490,
+        "shares": 810,
+        "dislikes": 22,
+        "reach": 88000,
+        "videoViews": 0,
+        "engagementScore": 96
+      },
+      "subscribers": 62400,
+      "createdAt": "2026-08-14T06:00:00.000Z",
+      "commentsList": [
+        {
+          "id": "c6",
+          "user": "tech_founder_x",
+          "comment": "Bookmark velocity is definitely the secret ranking factor right now.",
+          "sentiment": "positive",
+          "timestamp": "2026-08-14T06:30:00.000Z"
+        },
+        {
+          "id": "c7",
+          "user": "critic_guy",
+          "comment": "Replies still drive the most notifications though.",
+          "sentiment": "neutral",
+          "timestamp": "2026-08-14T07:00:00.000Z"
+        }
+      ]
+    },
+    {
+      "id": "cm_post_tw_2",
+      "platform": "twitter",
+      "postType": "video",
+      "category": "AI & Tech",
+      "caption": "Live preview: Watching an autonomous AI agent diagnose cross-platform engagement drops in under 2 seconds ⚡️\n\nFull benchmark in the clip: #DataScience #AIAgents #EngageIQ",
+      "mediaSpecs": {
+        "aspectRatio": "9:16",
+        "durationSec": 22,
+        "hasSubtitles": true,
+        "hookRating": 9,
+        "hasTextOverlay": true
+      },
+      "metrics": {
+        "likes": 2980,
+        "comments": 360,
+        "shares": 640,
+        "dislikes": 8,
+        "reach": 76000,
+        "videoViews": 69000,
+        "engagementScore": 93
+      },
+      "subscribers": 62400,
+      "createdAt": "2026-08-13T12:00:00.000Z",
+      "commentsList": [
+        {
+          "id": "c8",
+          "user": "dev_rachel",
+          "comment": "This speed is unbelievable. What stack is power this?",
+          "sentiment": "positive",
+          "timestamp": "2026-08-13T12:30:00.000Z"
+        }
+      ]
+    },
+    {
+      "id": "cm_post_li_1",
+      "platform": "linkedin",
+      "postType": "carousel",
+      "category": "Business & Leadership",
+      "caption": "Most B2B brands post on LinkedIn without an algorithmic distribution model. Here is the exact 7-slide framework we used to scale B2B audience engagement by 180% in 60 days.\n\nSwipe through the document ➡️\n\nWhich slide resonates most with your current team goals? Let's discuss in the comments. #B2BMarketing #Leadership #GrowthStrategy #DataDriven",
+      "mediaSpecs": {
+        "aspectRatio": "4:5",
+        "slideCount": 7,
+        "hasTextOverlay": true,
+        "imageType": "carousel"
+      },
+      "metrics": {
+        "likes": 3120,
+        "comments": 520,
+        "shares": 490,
+        "dislikes": 3,
+        "reach": 72000,
+        "videoViews": 0,
+        "engagementScore": 97
+      },
+      "subscribers": 28900,
+      "createdAt": "2026-08-14T03:30:00.000Z",
+      "commentsList": [
+        {
+          "id": "c9",
+          "user": "elena_vp",
+          "comment": "Slide 3 on hook velocity before the fold is exceptionally practical. Shared with our content team!",
+          "sentiment": "positive",
+          "timestamp": "2026-08-14T04:00:00.000Z"
+        },
+        {
+          "id": "c10",
+          "user": "marcus_lead",
+          "comment": "Insightful framework! How does this adjust for non-tech industries?",
+          "sentiment": "positive",
+          "timestamp": "2026-08-14T04:45:00.000Z"
+        }
+      ]
+    },
+    {
+      "id": "cm_post_li_2",
+      "platform": "linkedin",
+      "postType": "video",
+      "category": "AI & Tech",
+      "caption": "Why Executive AI Literacy is the #1 Competitive Advantage in 2026. A 35-second executive summary on scaling intelligent workflow systems.\n\nWatch with subtitles enabled: #ArtificialIntelligence #FutureOfWork #ExecutiveLeadership",
+      "mediaSpecs": {
+        "aspectRatio": "9:16",
+        "durationSec": 35,
+        "hasSubtitles": true,
+        "hookRating": 9,
+        "hasTextOverlay": true
+      },
+      "metrics": {
+        "likes": 2480,
+        "comments": 380,
+        "shares": 340,
+        "dislikes": 2,
+        "reach": 58000,
+        "videoViews": 51000,
+        "engagementScore": 92
+      },
+      "subscribers": 28900,
+      "createdAt": "2026-08-11T16:00:00.000Z",
+      "commentsList": [
+        {
+          "id": "c11",
+          "user": "jason_director",
+          "comment": "Concise, data-backed, and straight to the point.",
+          "sentiment": "positive",
+          "timestamp": "2026-08-11T16:30:00.000Z"
+        }
+      ]
+    }
+  ]
+}

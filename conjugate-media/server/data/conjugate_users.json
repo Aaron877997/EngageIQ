@@ -1,0 +1,29 @@
+{
+  "default_user": {
+    "email": "default_user",
+    "registeredAt": "2026-08-14T13:24:49.537Z",
+    "platforms": [
+      "instagram",
+      "facebook",
+      "twitter",
+      "linkedin"
+    ],
+    "hasSocialAccount": true,
+    "role": "demo_user"
+  },
+  "test_creator@gmail.com": {
+    "email": "test_creator@gmail.com",
+    "displayName": "Test Creator",
+    "passwordHash": "b55c8792d1ce458e279308835f8a97b580263503e76e1998e279703e35ad0c2e",
+    "hasSocialAccount": true,
+    "platforms": [
+      "instagram",
+      "facebook",
+      "twitter",
+      "linkedin"
+    ],
+    "registeredAt": "2026-08-14T13:25:59.262Z",
+    "lastActive": "2026-08-14T13:25:59.262Z",
+    "status": "active"
+  }
+}

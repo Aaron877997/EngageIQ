@@ -17,6 +17,71 @@ const PLATFORMS = [
   { id: 'facebook', label: 'Facebook', icon: '👥' },
 ];
 
+function formatInline(str) {
+  if (!str) return '';
+  return str
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.*?)\*/g, '<em>$1</em>')
+    .replace(/(#[a-zA-Z0-9_]+)/g, '<span class="hashtag-highlight">$1</span>');
+}
+
+function renderFormattedMarkdown(text) {
+  if (!text) return null;
+  const blocks = text.trim().split(/\n\s*\n/);
+
+  return blocks.map((block, bIdx) => {
+    const trimmed = block.trim();
+    if (!trimmed) return null;
+
+    const lines = trimmed.split('\n').map(l => l.trim()).filter(Boolean);
+
+    // If block starts with a heading '### '
+    if (lines[0].startsWith('### ')) {
+      const headingText = lines[0].replace(/^###\s+/, '');
+      const remainingLines = lines.slice(1);
+
+      return (
+        <div key={bIdx} className="resp-section-block">
+          <h4 className="resp-h4" dangerouslySetInnerHTML={{ __html: formatInline(headingText) }} />
+          {remainingLines.length > 0 && (
+            <ul className="resp-list">
+              {remainingLines.map((line, lIdx) => (
+                <li
+                  key={lIdx}
+                  dangerouslySetInnerHTML={{ __html: formatInline(line.replace(/^-\s+/, '')) }}
+                />
+              ))}
+            </ul>
+          )}
+        </div>
+      );
+    }
+
+    // If lines are list items
+    if (lines[0].startsWith('- ') || lines[0].startsWith('* ') || /^\d+\.\s+/.test(lines[0])) {
+      return (
+        <ul key={bIdx} className="resp-list">
+          {lines.map((line, lIdx) => (
+            <li
+              key={lIdx}
+              dangerouslySetInnerHTML={{ __html: formatInline(line.replace(/^[-\*]\s+|\d+\.\s+/, '')) }}
+            />
+          ))}
+        </ul>
+      );
+    }
+
+    // Regular paragraph
+    return (
+      <p
+        key={bIdx}
+        className="resp-paragraph"
+        dangerouslySetInnerHTML={{ __html: formatInline(trimmed) }}
+      />
+    );
+  });
+}
+
 function AIQuery({ onNavigate, onBack, connectedPlatforms = [] }) {
   const [activeMode, setActiveMode] = useState('nlp');
   const [loading, setLoading] = useState(false);
@@ -29,6 +94,7 @@ function AIQuery({ onNavigate, onBack, connectedPlatforms = [] }) {
 
   // 1. NLP Query State
   const [query, setQuery] = useState('');
+  const [routingMode, setRoutingMode] = useState('auto'); // 'auto' | 'ml_only' | 'gemini_only'
   const [aiResponse, setAiResponse] = useState(null);
 
   // 2. Text Optimizer State
@@ -161,7 +227,7 @@ function AIQuery({ onNavigate, onBack, connectedPlatforms = [] }) {
     }
   };
 
-  // Handle Ask AI Query
+  // Handle Ask AI Query with Smart Engine Routing
   const handleQuerySubmit = async (e, customQuery) => {
     if (e) e.preventDefault();
     const queryToUse = customQuery || query;
@@ -174,7 +240,10 @@ function AIQuery({ onNavigate, onBack, connectedPlatforms = [] }) {
       const res = await fetch(`/api/ai-query?platforms=${platformParam}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ question: queryToUse })
+        body: JSON.stringify({
+          question: queryToUse,
+          mode: routingMode
+        })
       });
       const data = await res.json();
       setAiResponse(data);
@@ -273,19 +342,26 @@ function AIQuery({ onNavigate, onBack, connectedPlatforms = [] }) {
     }
   };
 
-  const examplePrompts = [
-    { label: '🔥 What topics are trending on LinkedIn?', q: 'What topics are trending on LinkedIn?' },
+  const fixedMLPrompts = [
+    { label: '💡 What should I post next to increase engagement?', q: 'What should I post next to increase engagement?' },
     { label: '⏰ Best time to post on Instagram?', q: 'What is the best time to post on Instagram?' },
     { label: '📊 Compare Instagram vs Twitter performance', q: 'Compare Instagram vs Twitter' },
     { label: '🎬 Reels vs Static Posts breakdown', q: 'Which content type performs best between Reels and Static?' },
-    { label: '💡 What should I post next for high reach?', q: 'What should I post next?' },
     { label: '📉 Why did engagement drop recently?', q: 'Why did my reach drop last week?' },
+    { label: '🔥 Trending topics on LinkedIn', q: 'What topics are trending on LinkedIn?' }
+  ];
+
+  const creativeGeminiPrompts = [
+    { label: '✨ Write 3 viral opening hooks for an AI SaaS launch', q: 'Write 3 high-converting viral opening hooks for an AI SaaS product launch.' },
+    { label: '🚀 How to structure a 30-day creator growth sprint?', q: 'How should I structure a 30-day cross-platform creator growth sprint for high retention?' },
+    { label: '💡 Explain saves vs shares priority in 2026 algorithms', q: 'Explain how current social media algorithms treat saves vs shares for organic distribution in 2026.' },
+    { label: '📝 5 carousel slide ideas for AI workflows', q: 'Give me 5 slide ideas and copywriting outline for an Instagram & LinkedIn carousel about AI workflow automation.' }
   ];
 
   return (
     <PageLayout
       title="AI Intelligence Studio"
-      subtitle="Self-Learning ML Model (Text, Pics, Videos), Natural Language Query, and Platform Trends"
+      subtitle="Self-Learning ML Model, Google Gemini AI Agent, Multi-Platform Analytics, and Trend Forecasting"
       onBack={onBack}
       nav={createDashboardNav(onNavigate, 'ai-query')}
       layout="dashboard"
@@ -301,7 +377,7 @@ function AIQuery({ onNavigate, onBack, connectedPlatforms = [] }) {
                 🧠 Dynamic ML Engine: <strong>{mlStatus ? `Active (R² = ${mlStatus.r2_score})` : 'Trained'}</strong>
               </span>
               <span className="ml-status-sub">
-                Learned from {mlStatus?.sample_count || 40}+ past posts in JSON feed • Auto-calibrated with Ridge Regression
+                Learned from {mlStatus?.sample_count || 40}+ past posts in live Conjugate Media feed • Calibrated with Ridge Regression
               </span>
             </div>
           </div>
@@ -309,11 +385,19 @@ function AIQuery({ onNavigate, onBack, connectedPlatforms = [] }) {
             <button
               type="button"
               className="btn btn-secondary btn-sm"
+              onClick={() => onNavigate('conjugate')}
+              title="Open Conjugate Media sandbox to modulate posts, likes, & subscribers"
+            >
+              📱 Conjugate Media Controls
+            </button>
+            <button
+              type="button"
+              className="btn btn-secondary btn-sm"
               onClick={handleSyncNewPlatformPost}
               disabled={isRetraining}
               title="Simulate receiving new platform post webhook JSON"
             >
-              ➕ Ingest Platform JSON Post
+              ➕ Ingest Webhook Post
             </button>
             <button
               type="button"
@@ -363,6 +447,37 @@ function AIQuery({ onNavigate, onBack, connectedPlatforms = [] }) {
         {activeMode === 'nlp' && (
           <div className="mode-panel">
             <div className="query-card">
+              {/* Engine Mode Selector */}
+              <div className="engine-routing-bar">
+                <span className="engine-routing-label">Intelligence Engine:</span>
+                <div className="engine-routing-pills">
+                  <button
+                    type="button"
+                    className={`engine-pill-btn ${routingMode === 'auto' ? 'active' : ''}`}
+                    onClick={() => setRoutingMode('auto')}
+                    title="Auto-routes: ML Engine for fixed analytics queries, Gemini Agent for random queries"
+                  >
+                    🤖 Smart Auto-Route
+                  </button>
+                  <button
+                    type="button"
+                    className={`engine-pill-btn ${routingMode === 'ml_only' ? 'active' : ''}`}
+                    onClick={() => setRoutingMode('ml_only')}
+                    title="Force EngageIQ Dynamic ML Model & Analytics Engine"
+                  >
+                    🧠 ML Model & Data Engine
+                  </button>
+                  <button
+                    type="button"
+                    className={`engine-pill-btn ${routingMode === 'gemini_only' ? 'active' : ''}`}
+                    onClick={() => setRoutingMode('gemini_only')}
+                    title="Force Google Gemini 1.5 Flash AI Agent"
+                  >
+                    ✨ Gemini 1.5 Flash AI Agent
+                  </button>
+                </div>
+              </div>
+
               <form onSubmit={(e) => handleQuerySubmit(e)} className="query-input-form">
                 <div className="input-wrapper">
                   <span className="input-icon">💬</span>
@@ -370,7 +485,7 @@ function AIQuery({ onNavigate, onBack, connectedPlatforms = [] }) {
                     type="text"
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
-                    placeholder="Ask anything (e.g., 'What is trending on LinkedIn?', 'Best time to post?', 'Why did reach drop?')..."
+                    placeholder="Ask anything (e.g., 'What should I post next?', 'Best time to post?', or 'Write 3 viral hooks')..."
                     disabled={loading}
                   />
                 </div>
@@ -379,28 +494,64 @@ function AIQuery({ onNavigate, onBack, connectedPlatforms = [] }) {
                 </button>
               </form>
 
+              {/* Categorized Quick Prompts */}
               <div className="quick-prompts-bar">
-                <span className="quick-prompts-label">Quick Insights:</span>
-                <div className="quick-prompts-grid">
-                  {examplePrompts.map((p) => (
-                    <button
-                      key={p.label}
-                      type="button"
-                      className="prompt-chip"
-                      onClick={() => {
-                        setQuery(p.q);
-                        handleQuerySubmit(null, p.q);
-                      }}
-                    >
-                      {p.label}
-                    </button>
-                  ))}
+                <div className="prompt-chips-section">
+                  <div className="prompt-chips-row">
+                    <span className="prompt-group-tag">🧠 Fixed ML Queries:</span>
+                    {fixedMLPrompts.map((p) => (
+                      <button
+                        key={p.label}
+                        type="button"
+                        className="prompt-chip"
+                        onClick={() => {
+                          setQuery(p.q);
+                          handleQuerySubmit(null, p.q);
+                        }}
+                      >
+                        {p.label}
+                      </button>
+                    ))}
+                  </div>
+
+                  <div className="prompt-chips-row" style={{ marginTop: '0.4rem' }}>
+                    <span className="prompt-group-tag" style={{ color: '#f472b6' }}>✨ Gemini AI Queries:</span>
+                    {creativeGeminiPrompts.map((p) => (
+                      <button
+                        key={p.label}
+                        type="button"
+                        className="prompt-chip"
+                        style={{ borderColor: 'rgba(244, 114, 182, 0.3)' }}
+                        onClick={() => {
+                          setQuery(p.q);
+                          handleQuerySubmit(null, p.q);
+                        }}
+                      >
+                        {p.label}
+                      </button>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
 
             {aiResponse ? (
               <div className="ai-response-card">
+                {/* Engine Source Badge */}
+                <div>
+                  {aiResponse.engineUsed === 'gemini_agent' ? (
+                    <div className="engine-source-badge gemini">
+                      <span>✨</span>
+                      <span>Engine: {aiResponse.engineLabel || 'Gemini 1.5 Flash AI Agent'} (Google Generative AI)</span>
+                    </div>
+                  ) : (
+                    <div className="engine-source-badge ml">
+                      <span>🧠</span>
+                      <span>Engine: {aiResponse.engineLabel || 'EngageIQ Dynamic ML Model & Analytics Engine'}</span>
+                    </div>
+                  )}
+                </div>
+
                 <div className="response-header">
                   <div className="response-title-badge">
                     <span className="ai-sparkle">✦</span>
@@ -412,25 +563,7 @@ function AIQuery({ onNavigate, onBack, connectedPlatforms = [] }) {
                 </div>
 
                 <div className="response-content">
-                  {aiResponse.response.split('\n\n').map((paragraph, idx) => {
-                    if (paragraph.startsWith('### ')) {
-                      return <h4 key={idx} className="resp-h4">{paragraph.replace('### ', '')}</h4>;
-                    }
-                    if (paragraph.startsWith('- ')) {
-                      const items = paragraph.split('\n').map((li, i) => (
-                        <li key={i} dangerouslySetInnerHTML={{ __html: li.replace(/^- /, '').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\*(.*?)\*/g, '<em>$1</em>') }} />
-                      ));
-                      return <ul key={idx} className="resp-list">{items}</ul>;
-                    }
-                    return (
-                      <p
-                        key={idx}
-                        dangerouslySetInnerHTML={{
-                          __html: paragraph.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\*(.*?)\*/g, '<em>$1</em>')
-                        }}
-                      />
-                    );
-                  })}
+                  {renderFormattedMarkdown(aiResponse.response)}
                 </div>
 
                 {aiResponse.meta && (
@@ -466,7 +599,7 @@ function AIQuery({ onNavigate, onBack, connectedPlatforms = [] }) {
               <div className="empty-assistant-placeholder">
                 <div className="placeholder-art">✨</div>
                 <h3>Ask Anything in Natural Language</h3>
-                <p>Query cross-platform metrics, compare formats, discover trending topics, or get advice before you publish.</p>
+                <p>Fixed questions (recommendations, best times, trends, reach drops) use our <strong>ML Model & dynamic data</strong>. Random & strategic questions use our <strong>Gemini AI Agent</strong>.</p>
               </div>
             )}
           </div>

@@ -25,6 +25,15 @@ function HomePage({ onNavigate, onBack, onConnect }) {
     });
   };
 
+  const handleConnectAll = () => {
+    const all = {};
+    PLATFORMS.forEach((p) => {
+      all[p.id] = "connected";
+    });
+    setConnectedPlatforms(all);
+    setError("");
+  };
+
   const handleProceed = () => {
     const selected = Object.keys(connectedPlatforms).filter(
       (p) => connectedPlatforms[p] === "connected"
@@ -60,6 +69,17 @@ function HomePage({ onNavigate, onBack, onConnect }) {
           <div>{error}</div>
         </div>
       )}
+
+      <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: "0.75rem" }}>
+        <button
+          type="button"
+          className="btn btn-secondary btn-sm"
+          onClick={handleConnectAll}
+          title="Connect all simulated platforms at once"
+        >
+          ⚡ Connect All (1-Click)
+        </button>
+      </div>
 
       <div className="platform-grid">
         {PLATFORMS.map((platform) => {
