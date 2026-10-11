@@ -4,14 +4,16 @@ const PLATFORM_ICONS = {
   instagram: '📸',
   twitter: '𝕏',
   linkedin: '🔗',
-  facebook: '👥'
+  facebook: '👥',
+  youtube: '▶️'
 };
 
 const PLATFORM_TAGS = {
   instagram: { label: 'Instagram Reel/Post', class: 'ig' },
   twitter: { label: 'X (Twitter)', class: 'tw' },
   linkedin: { label: 'LinkedIn Article/Update', class: 'li' },
-  facebook: { label: 'Facebook Post', class: 'fb' }
+  facebook: { label: 'Facebook Post', class: 'fb' },
+  youtube: { label: 'YouTube Video', class: 'yt' }
 };
 
 export default function PostCard({
@@ -47,6 +49,9 @@ export default function PostCard({
   };
 
   const commentsList = post.commentsList || [];
+  const authorName = post.author || post.name || (platKey === 'twitter' ? '@creator_ai' : platKey === 'instagram' ? 'engage_creator' : 'EngageIQ Creator');
+  const authorAvatar = post.avatar || post.userAvatar;
+  const isVideo = post.postType === 'video' || post.type === 'video' || platKey === 'youtube';
 
   return (
     <div className={`cm-post-card ${platInfo.class}`}>
@@ -54,17 +59,26 @@ export default function PostCard({
       <div className="cm-post-header">
         <div className="cm-post-user-info">
           <div className="cm-post-avatar">
-            {PLATFORM_ICONS[platKey] || '📱'}
+            {authorAvatar ? (
+              <img
+                src={authorAvatar}
+                alt={authorName}
+                style={{ width: '36px', height: '36px', borderRadius: '50%', objectFit: 'cover' }}
+              />
+            ) : (
+              PLATFORM_ICONS[platKey] || '📱'
+            )}
           </div>
           <div>
             <div className="cm-post-author-row">
-              <span className="cm-post-author">
-                {platKey === 'twitter' ? '@creator_ai' : platKey === 'instagram' ? 'engage_creator' : 'EngageIQ Creator'}
-              </span>
+              <span className="cm-post-author">{authorName}</span>
+              {post.username && (
+                <span style={{ fontSize: '0.78rem', color: '#64748b' }}>@{post.username}</span>
+              )}
               <span className="cm-post-platform-tag">{platInfo.label}</span>
             </div>
             <span className="cm-post-date">
-              {new Date(post.createdAt || Date.now()).toLocaleDateString('en-US', {
+              {new Date(post.createdAt || post.publishedAt || Date.now()).toLocaleDateString('en-US', {
                 month: 'short',
                 day: 'numeric',
                 hour: '2-digit',
@@ -75,7 +89,7 @@ export default function PostCard({
         </div>
 
         <div className="cm-post-top-right">
-          <span className="cm-category-badge">{post.category || 'General'}</span>
+          <span className="cm-category-badge">{post.category || (platKey === 'youtube' ? 'Video' : 'General')}</span>
           <button
             type="button"
             className="cm-delete-btn"
@@ -90,10 +104,12 @@ export default function PostCard({
       {/* Post Format & Media Specs */}
       <div className="cm-post-specs-row">
         <span className="cm-spec-pill">
-          {post.postType === 'video' ? '🎬 Short Video' : post.postType === 'carousel' ? '📑 Carousel' : post.postType === 'image' ? '🖼️ Image' : '💬 Text'}
+          {isVideo ? '🎬 Short Video / Reel' : post.postType === 'carousel' ? '📑 Carousel' : post.postType === 'image' ? '🖼️ Image' : '💬 Text'}
         </span>
-        {post.mediaSpecs?.durationSec > 0 && (
-          <span className="cm-spec-pill">⏱️ {post.mediaSpecs.durationSec}s</span>
+        {(post.duration || post.mediaSpecs?.durationSec > 0) && (
+          <span className="cm-spec-pill">
+            ⏱️ {post.duration || `${post.mediaSpecs.durationSec}s`}
+          </span>
         )}
         {post.mediaSpecs?.aspectRatio && (
           <span className="cm-spec-pill">📐 {post.mediaSpecs.aspectRatio}</span>
@@ -103,9 +119,39 @@ export default function PostCard({
         </span>
       </div>
 
-      {/* Caption Content */}
+      {/* Media Preview (YouTube Video / Image thumbnail) */}
+      {post.mediaUrl && (
+        <div className="cm-post-media">
+          <img
+            src={post.mediaUrl}
+            alt={post.title || post.caption || 'Post media'}
+            className="cm-post-media-img"
+          />
+          {post.duration && (
+            <span className="cm-video-badge">{post.duration}</span>
+          )}
+          {post.videoUrl && (
+            <a
+              href={post.videoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="cm-video-play-btn"
+              title="Watch full video"
+            >
+              <span className="cm-video-play-icon">▶</span>
+            </a>
+          )}
+        </div>
+      )}
+
+      {/* Caption & Title Content */}
       <div className="cm-post-body">
-        <p className="cm-post-caption">{post.caption || post.text || ''}</p>
+        {post.title && (
+          <h4 style={{ margin: '0 0 0.4rem 0', fontSize: '1.05rem', fontWeight: 700, color: '#f8fafc' }}>
+            {post.title}
+          </h4>
+        )}
+        <p className="cm-post-caption">{post.caption || post.content || post.text || ''}</p>
       </div>
 
       {/* Metrics & Modulators Bar */}
@@ -114,7 +160,7 @@ export default function PostCard({
         <div className="cm-metric-mod-box">
           <div className="cm-metric-info">
             <span className="cm-metric-name">❤️ Likes</span>
-            <span className="cm-metric-number">{(metrics.likes || 0).toLocaleString()}</span>
+            <span className="cm-metric-number">{(metrics.likes || post.likes || 0).toLocaleString()}</span>
           </div>
           <div className="cm-mod-btn-group">
             <button
@@ -148,7 +194,7 @@ export default function PostCard({
         <div className="cm-metric-mod-box">
           <div className="cm-metric-info">
             <span className="cm-metric-name">💬 Comments</span>
-            <span className="cm-metric-number">{(metrics.comments || 0).toLocaleString()}</span>
+            <span className="cm-metric-number">{(metrics.comments || post.comments || 0).toLocaleString()}</span>
           </div>
           <div className="cm-mod-btn-group">
             <button
@@ -182,7 +228,7 @@ export default function PostCard({
         <div className="cm-metric-mod-box">
           <div className="cm-metric-info">
             <span className="cm-metric-name">🔁 Shares</span>
-            <span className="cm-metric-number">{(metrics.shares || 0).toLocaleString()}</span>
+            <span className="cm-metric-number">{(metrics.shares || post.shares || 0).toLocaleString()}</span>
           </div>
           <div className="cm-mod-btn-group">
             <button
@@ -216,7 +262,7 @@ export default function PostCard({
         <div className="cm-metric-mod-box">
           <div className="cm-metric-info">
             <span className="cm-metric-name">👎 Dislikes</span>
-            <span className="cm-metric-number">{(metrics.dislikes || 0).toLocaleString()}</span>
+            <span className="cm-metric-number">{(metrics.dislikes || post.dislikes || 0).toLocaleString()}</span>
           </div>
           <div className="cm-mod-btn-group">
             <button
@@ -249,9 +295,9 @@ export default function PostCard({
 
       {/* Reach & Views Indicator */}
       <div className="cm-reach-row">
-        <span>👁️ Reach: <strong>{(metrics.reach || 1000).toLocaleString()}</strong></span>
-        {metrics.videoViews > 0 && (
-          <span>▶️ Video Views: <strong>{metrics.videoViews.toLocaleString()}</strong></span>
+        <span>👁️ Reach: <strong>{(metrics.reach || metrics.views || post.views || 1000).toLocaleString()}</strong></span>
+        {(metrics.videoViews > 0 || (platKey === 'youtube' && post.views > 0)) && (
+          <span>▶️ Video Views: <strong>{(metrics.videoViews || post.views).toLocaleString()}</strong></span>
         )}
         <button
           type="button"

@@ -5,6 +5,7 @@ const PLATFORM_COLORS = {
   twitter: '#0f172a',
   linkedin: '#0a66c2',
   facebook: '#1877f2',
+  youtube: '#FF0000',
   all: 'linear-gradient(135deg, #3b82f6, #8b5cf6)'
 };
 
@@ -24,7 +25,7 @@ export default function ChannelProfile({
               <span className="cm-badge">Live Sandbox</span>
             </div>
             <p className="cm-channel-bio">
-              Controlling feeds across Instagram, Facebook, X (Twitter), and LinkedIn. Changes propagate in real-time to EngageIQ!
+              Controlling feeds across Instagram, Facebook, X (Twitter), LinkedIn and YouTube. Changes propagate in real-time to EngageIQ!
             </p>
           </div>
         </div>
@@ -42,21 +43,41 @@ export default function ChannelProfile({
   };
 
   const platColor = PLATFORM_COLORS[platform] || '#2563eb';
+  const avatarImg = ch.avatar || ch.profilePicUrl || ch.image;
+  const subscriberCount = Number(ch.followers || ch.subscribers || 0);
+  const displayHandle = ch.handle || (ch.username ? `@${ch.username}` : `@${platform}_creator`);
 
   return (
     <div className="cm-channel-banner">
       <div className="cm-channel-left">
-        <div className="cm-channel-avatar" style={{ background: platColor }}>
-          {platform === 'instagram' && '📸'}
-          {platform === 'twitter' && '𝕏'}
-          {platform === 'linkedin' && '🔗'}
-          {platform === 'facebook' && '👥'}
+        <div 
+          className="cm-channel-avatar" 
+          style={{ 
+            background: avatarImg ? 'transparent' : platColor,
+            overflow: 'hidden'
+          }}
+        >
+          {avatarImg ? (
+            <img
+              src={avatarImg}
+              alt={ch.name || platform}
+              style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 'inherit' }}
+            />
+          ) : (
+            <>
+              {platform === 'instagram' && '📸'}
+              {platform === 'twitter' && '𝕏'}
+              {platform === 'linkedin' && '🔗'}
+              {platform === 'facebook' && '👥'}
+              {platform === 'youtube' && '▶️'}
+            </>
+          )}
         </div>
         <div>
           <div className="cm-channel-title">
             <h3>{ch.name || `${platform.toUpperCase()} Channel`}</h3>
-            <span className="cm-handle">{ch.handle || `@${platform}_creator`}</span>
-            <span className="cm-badge">{ch.category || 'General'}</span>
+            <span className="cm-handle">{displayHandle}</span>
+            <span className="cm-badge">{ch.category || (platform === 'youtube' ? 'Video Creator' : 'General')}</span>
           </div>
           <p className="cm-channel-bio">{ch.bio || 'Managing dynamic social feeds.'}</p>
         </div>
@@ -64,15 +85,17 @@ export default function ChannelProfile({
 
       <div className="cm-subscribers-box">
         <div className="cm-subs-stat">
-          <span className="cm-subs-label">Subscribers / Followers</span>
-          <span className="cm-subs-val">{Number(ch.subscribers || 0).toLocaleString()}</span>
+          <span className="cm-subs-label">
+            {platform === 'youtube' ? 'Subscribers' : 'Followers'}
+          </span>
+          <span className="cm-subs-val">{subscriberCount.toLocaleString()}</span>
         </div>
         <div className="cm-subs-boosters">
           <button
             type="button"
             className="cm-mod-btn success"
             onClick={() => onModulateSubscribers(platform, 100)}
-            title="Add +100 subscribers"
+            title="Add +100"
           >
             +100
           </button>
@@ -80,7 +103,7 @@ export default function ChannelProfile({
             type="button"
             className="cm-mod-btn success"
             onClick={() => onModulateSubscribers(platform, 1000)}
-            title="Add +1,000 subscribers"
+            title="Add +1,000"
           >
             +1,000
           </button>
@@ -88,7 +111,7 @@ export default function ChannelProfile({
             type="button"
             className="cm-mod-btn danger"
             onClick={() => onModulateSubscribers(platform, -500)}
-            title="Subtract -500 subscribers"
+            title="Subtract -500"
           >
             -500
           </button>

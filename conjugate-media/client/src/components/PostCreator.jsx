@@ -17,7 +17,10 @@ export default function PostCreator({
   const [platform, setPlatform] = useState(defaultPlatform === 'all' ? 'instagram' : defaultPlatform);
   const [postType, setPostType] = useState('video');
   const [category, setCategory] = useState('AI & Tech');
+  const [title, setTitle] = useState('');
   const [caption, setCaption] = useState('');
+  const [mediaUrl, setMediaUrl] = useState('');
+  const [videoUrl, setVideoUrl] = useState('');
   const [aspectRatio, setAspectRatio] = useState('9:16');
   const [durationSec, setDurationSec] = useState(25);
   const [hasSubtitles, setHasSubtitles] = useState(true);
@@ -31,8 +34,25 @@ export default function PostCreator({
   React.useEffect(() => {
     if (defaultPlatform !== 'all') {
       setPlatform(defaultPlatform);
+      if (defaultPlatform === 'youtube') {
+        setPostType('video');
+        setAspectRatio('16:9');
+        setDurationSec(180);
+      }
     }
   }, [defaultPlatform]);
+
+  const handlePlatformChange = (newPlatform) => {
+    setPlatform(newPlatform);
+    if (newPlatform === 'youtube') {
+      setPostType('video');
+      setAspectRatio('16:9');
+      if (durationSec < 60) setDurationSec(180);
+    } else if (postType === 'video') {
+      setAspectRatio('9:16');
+      if (durationSec > 90) setDurationSec(30);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -40,11 +60,21 @@ export default function PostCreator({
 
     setIsPublishing(true);
     try {
+      // Calculate display duration format (mm:ss) for videos
+      const minutes = Math.floor(durationSec / 60);
+      const remainingSecs = durationSec % 60;
+      const formattedDuration = `${String(minutes).padStart(2, '0')}:${String(remainingSecs).padStart(2, '0')}`;
+
       await onCreatePost({
         platform,
         postType,
         category,
-        caption,
+        title: title.trim(),
+        caption: caption.trim(),
+        content: caption.trim(),
+        mediaUrl: mediaUrl.trim(),
+        videoUrl: videoUrl.trim(),
+        duration: postType === 'video' ? formattedDuration : undefined,
         mediaSpecs: {
           aspectRatio,
           durationSec: Number(durationSec),
@@ -54,7 +84,10 @@ export default function PostCreator({
           slideCount: Number(slideCount)
         }
       });
+      setTitle('');
       setCaption('');
+      setMediaUrl('');
+      setVideoUrl('');
       setIsExpanded(false);
     } catch (err) {
       console.error(err);
@@ -94,12 +127,13 @@ export default function PostCreator({
               <select
                 className="cm-input"
                 value={platform}
-                onChange={(e) => setPlatform(e.target.value)}
+                onChange={(e) => handlePlatformChange(e.target.value)}
               >
                 <option value="instagram">📸 Instagram</option>
                 <option value="twitter">𝕏 X (Twitter)</option>
                 <option value="linkedin">🔗 LinkedIn</option>
                 <option value="facebook">👥 Facebook</option>
+                <option value="youtube">▶️ YouTube</option>
               </select>
             </div>
 
@@ -112,12 +146,18 @@ export default function PostCreator({
                 onChange={(e) => {
                   const val = e.target.value;
                   setPostType(val);
-                  if (val === 'video') setAspectRatio('9:16');
-                  else if (val === 'carousel') setAspectRatio('4:5');
-                  else if (val === 'image') setAspectRatio('1:1');
+                  if (val === 'video') {
+                    setAspectRatio(platform === 'youtube' ? '16:9' : '9:16');
+                  } else if (val === 'carousel') {
+                    setAspectRatio('4:5');
+                  } else if (val === 'image') {
+                    setAspectRatio('1:1');
+                  }
                 }}
               >
-                <option value="video">🎬 Short Video / Reel (9:16)</option>
+                <option value="video">
+                  {platform === 'youtube' ? '🎬 YouTube Video (16:9)' : '🎬 Short Video / Reel (9:16)'}
+                </option>
                 <option value="carousel">📑 Multi-Slide Carousel (4:5)</option>
                 <option value="image">🖼️ Static Image Post (1:1)</option>
                 <option value="text">💬 Text Thread / Article</option>
@@ -141,13 +181,16 @@ export default function PostCreator({
             {/* Media Details */}
             {postType === 'video' && (
               <div className="cm-form-group">
-                <label className="cm-form-label">Duration ({durationSec}s):</label>
+                <label className="cm-form-label">
+                  Duration ({durationSec >= 60 ? `${Math.floor(durationSec / 60)}m ${durationSec % 60}s` : `${durationSec}s`}):
+                </label>
                 <input
                   type="range"
                   min="5"
-                  max="90"
+                  max={platform === 'youtube' ? '600' : '90'}
+                  step={platform === 'youtube' ? '5' : '1'}
                   value={durationSec}
-                  onChange={(e) => setDurationSec(e.target.value)}
+                  onChange={(e) => setDurationSec(Number(e.target.value))}
                   style={{ width: '100%' }}
                 />
               </div>
@@ -168,15 +211,57 @@ export default function PostCreator({
             )}
           </div>
 
+          {/* Optional Title (Recommended for YouTube / Long Articles) */}
+          {(platform === 'youtube' || postType === 'text') && (
+            <div className="cm-form-group" style={{ marginTop: '0.75rem' }}>
+              <label className="cm-form-label">Title / Headline:</label>
+              <input
+                type="text"
+                className="cm-input"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                placeholder="Enter an engaging headline or video title..."
+              />
+            </div>
+          )}
+
+          {/* Media & Video URL Inputs */}
+          {postType !== 'text' && (
+            <div className="cm-creator-grid" style={{ marginTop: '0.75rem' }}>
+              <div className="cm-form-group">
+                <label className="cm-form-label">Thumbnail / Image URL:</label>
+                <input
+                  type="url"
+                  className="cm-input"
+                  value={mediaUrl}
+                  onChange={(e) => setMediaUrl(e.target.value)}
+                  placeholder="https://... (image thumbnail or banner)"
+                />
+              </div>
+              {postType === 'video' && (
+                <div className="cm-form-group">
+                  <label className="cm-form-label">Video / Watch URL:</label>
+                  <input
+                    type="url"
+                    className="cm-input"
+                    value={videoUrl}
+                    onChange={(e) => setVideoUrl(e.target.value)}
+                    placeholder="https://www.youtube.com/watch?v=... or direct mp4"
+                  />
+                </div>
+              )}
+            </div>
+          )}
+
           {/* Caption Input */}
           <div className="cm-form-group" style={{ marginTop: '0.75rem' }}>
-            <label className="cm-form-label">Caption / Post Content:</label>
+            <label className="cm-form-label">Caption / Description:</label>
             <textarea
               rows={4}
               className="cm-input"
               value={caption}
               onChange={(e) => setCaption(e.target.value)}
-              placeholder="Write your engaging post caption, hooks, or thought leadership content..."
+              placeholder="Write your engaging post caption, hooks, or video description..."
               required
             />
           </div>

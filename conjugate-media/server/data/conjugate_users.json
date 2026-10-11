@@ -1,29 +1,77 @@
-{
-  "default_user": {
-    "email": "default_user",
-    "registeredAt": "2026-08-14T13:24:49.537Z",
-    "platforms": [
-      "instagram",
-      "facebook",
-      "twitter",
-      "linkedin"
-    ],
-    "hasSocialAccount": true,
-    "role": "demo_user"
+[
+  {
+    "id": "user_ig_nitishrajpute",
+    "email": "nitishrajpute@instagram.creator",
+    "username": "nitishrajpute",
+    "name": "Nitish Rajput",
+    "avatar": "https://scontent-dus1-1.cdninstagram.com/v/t51.2885-19/448202996_1153029145818120_4961460699353102897_n.jpg?stp=dst-jpg_s320x320_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLmRqYW5nby4xMDgwLmMyIn0&_nc_ht=scontent-dus1-1.cdninstagram.com&_nc_cat=1&_nc_oc=Q6cZ2gGhr7NC5I1ffhh_RTkTOH2JBc7qyzyfstklJtDVdCZC_6P0vcwtQ9GQQK-Dc5Maq5M&_nc_ohc=HcDXNEf_lIUQ7kNvwHHrUU3&_nc_gid=NQtAxYEUNdWYcAs506fAmw&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AQNsHKxQiTqHxTBDdHVAnP80bjBanJSQMVe5h9x89vKwVw&oe=6ACFED7A&_nc_sid=8b3546",
+    "profilePicUrl": "https://scontent-dus1-1.cdninstagram.com/v/t51.2885-19/448202996_1153029145818120_4961460699353102897_n.jpg?stp=dst-jpg_s320x320_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLmRqYW5nby4xMDgwLmMyIn0&_nc_ht=scontent-dus1-1.cdninstagram.com&_nc_cat=1&_nc_oc=Q6cZ2gGhr7NC5I1ffhh_RTkTOH2JBc7qyzyfstklJtDVdCZC_6P0vcwtQ9GQQK-Dc5Maq5M&_nc_ohc=HcDXNEf_lIUQ7kNvwHHrUU3&_nc_gid=NQtAxYEUNdWYcAs506fAmw&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AQNsHKxQiTqHxTBDdHVAnP80bjBanJSQMVe5h9x89vKwVw&oe=6ACFED7A&_nc_sid=8b3546",
+    "bio": "- Video Creator | 18+ Million Community",
+    "platform": "instagram",
+    "followers": 3662163,
+    "following": 618,
+    "verified": true,
+    "totalPosts": 101,
+    "postsCount": 101
   },
-  "test_creator@gmail.com": {
-    "email": "test_creator@gmail.com",
-    "displayName": "Test Creator",
-    "passwordHash": "b55c8792d1ce458e279308835f8a97b580263503e76e1998e279703e35ad0c2e",
-    "hasSocialAccount": true,
-    "platforms": [
-      "instagram",
-      "facebook",
-      "twitter",
-      "linkedin"
-    ],
-    "registeredAt": "2026-08-14T13:25:59.262Z",
-    "lastActive": "2026-08-14T13:25:59.262Z",
-    "status": "active"
+  {
+    "id": "user_fb_nitishrajpute",
+    "email": "nitishrajpute@facebook.creator",
+    "username": "nitishrajpute",
+    "name": "Nitish Rajput",
+    "avatar": "https://scontent-iad3-1.xx.fbcdn.net/v/t39.30808-1/342479978_623566149194021_3540853729342395985_n.jpg?stp=cp0_dst-jpg_tt6&cstp=mx960x960&ctp=s40x40&_nc_cat=1&ccb=1-7&_nc_sid=2d3e12&_nc_ohc=3NdLcv9L-E8Q7kNvwFGX2On&_nc_oc=AdpXYVoPOt7Yo5sgFVxkCxtauldPY70C6mZbXr8GASf_3y0uBmzR_ebUuWEzmy5BC8Y&_nc_zt=24&_nc_ht=scontent-iad3-1.xx&_nc_gid=mff_DUtwqzrQfnXXtWNZDA&_nc_ss=7f2a8&oh=00_AQNwmWdySFY2LyE_bdx_QwNNYe01vCX4e3h8I6jquJdMqg&oe=6AD0C2E6",
+    "profilePicUrl": "https://scontent-iad3-1.xx.fbcdn.net/v/t39.30808-1/342479978_623566149194021_3540853729342395985_n.jpg?stp=cp0_dst-jpg_tt6&cstp=mx960x960&ctp=s40x40&_nc_cat=1&ccb=1-7&_nc_sid=2d3e12&_nc_ohc=3NdLcv9L-E8Q7kNvwFGX2On&_nc_oc=AdpXYVoPOt7Yo5sgFVxkCxtauldPY70C6mZbXr8GASf_3y0uBmzR_ebUuWEzmy5BC8Y&_nc_zt=24&_nc_ht=scontent-iad3-1.xx&_nc_gid=mff_DUtwqzrQfnXXtWNZDA&_nc_ss=7f2a8&oh=00_AQNwmWdySFY2LyE_bdx_QwNNYe01vCX4e3h8I6jquJdMqg&oe=6AD0C2E6",
+    "bio": "Official Facebook page of Nitish Rajput | Digital Creator",
+    "platform": "facebook",
+    "followers": 1250000,
+    "following": 45,
+    "verified": true,
+    "totalPosts": 100,
+    "postsCount": 100
+  },
+  {
+    "id": "user_li_nitishrajput",
+    "email": "nitishrajput@linkedin.creator",
+    "username": "nitishrajput",
+    "name": "Nitish Rajput",
+    "avatar": "https://media.licdn.com/dms/image/v2/D4D03AQF1bfOZE8Nw2A/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1700730625149?e=1793232000&v=beta&t=p8OyPERbiMv2XkLRquXdst8i5rCYdgQd2-1AkkrsHlA",
+    "profilePicUrl": "https://media.licdn.com/dms/image/v2/D4D03AQF1bfOZE8Nw2A/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1700730625149?e=1793232000&v=beta&t=p8OyPERbiMv2XkLRquXdst8i5rCYdgQd2-1AkkrsHlA",
+    "bio": "Youtuber | 18+ Million Community",
+    "platform": "linkedin",
+    "followers": 485000,
+    "following": 500,
+    "verified": true,
+    "totalPosts": 138,
+    "postsCount": 138
+  },
+  {
+    "id": "user_tw_nitishrajput",
+    "email": "nitishrajput@x.creator",
+    "username": "nitishrajput",
+    "name": "Nitish Rajput",
+    "avatar": "https://pbs.twimg.com/media/GqwEcp8WQAAfUJ_.jpg",
+    "profilePicUrl": "https://pbs.twimg.com/media/GqwEcp8WQAAfUJ_.jpg",
+    "bio": "Educating and questioning. Independent Content Creator.",
+    "platform": "twitter",
+    "followers": 650000,
+    "following": 120,
+    "verified": true,
+    "totalPosts": 399,
+    "postsCount": 399
+  },
+  {
+    "id": "user_yt_nitishrajput",
+    "email": "nitishrajput@youtube.partner",
+    "username": "nitishrajput",
+    "name": "Nitish Rajput",
+    "avatar": "https://yt3.googleusercontent.com/i4-MMwgecNSAYn2a_7uHH3HnNsl4xOQlM9tRt47CSfYtfV5fqYD1nl49rnuR29jmLNlSUoaCqA=s68-c-k-c0x00ffffff-no-rj",
+    "profilePicUrl": "https://yt3.googleusercontent.com/i4-MMwgecNSAYn2a_7uHH3HnNsl4xOQlM9tRt47CSfYtfV5fqYD1nl49rnuR29jmLNlSUoaCqA=s68-c-k-c0x00ffffff-no-rj",
+    "bio": "This channel is dedicated to informing, educating, and empowering people through well-researched, fact-based content.\n\nIn today’s digital age, social media and ...",
+    "platform": "youtube",
+    "followers": 8630000,
+    "following": 15,
+    "verified": true,
+    "totalPosts": 118,
+    "postsCount": 118
   }
-}
+]

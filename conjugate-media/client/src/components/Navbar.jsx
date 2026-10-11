@@ -9,6 +9,7 @@ const PLATFORMS = [
   { id: 'twitter', label: 'X (Twitter)', icon: '𝕏', className: 'tw' },
   { id: 'linkedin', label: 'LinkedIn', icon: '🔗', className: 'li' },
   { id: 'facebook', label: 'Facebook', icon: '👥', className: 'fb' },
+  { id: 'youtube', label: 'YouTube', icon: '▶️', className: 'yt' },
 ];
 
 export default function Navbar({

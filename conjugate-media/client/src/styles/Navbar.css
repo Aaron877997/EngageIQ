@@ -97,6 +97,12 @@
   box-shadow: 0 0 12px rgba(24, 119, 242, 0.4);
 }
 
+.cm-nav-plat-btn.active.yt {
+  background: #ff0000;
+  color: #fff;
+  box-shadow: 0 0 12px rgba(255, 0, 0, 0.45);
+}
+
 /* ── Right Actions ── */
 .cm-nav-right {
   display: flex;
